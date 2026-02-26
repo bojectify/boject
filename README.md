@@ -12,12 +12,12 @@ This repository demonstrates a production-ready TypeScript monorepo with:
 
 - **3 Publishable Packages** - Ready for NPM publishing
 
-  - `@org/strings` - String manipulation utilities
-  - `@org/async` - Async utility functions with retry logic
-  - `@org/colors` - Color conversion and manipulation utilities
+  - `@boject/strings` - String manipulation utilities
+  - `@boject/async` - Async utility functions with retry logic
+  - `@boject/colors` - Color conversion and manipulation utilities
 
 - **1 Internal Library**
-  - `@org/utils` - Shared utilities (private, not published)
+  - `@boject/utils` - Shared utilities (private, not published)
 
 ## 🚀 Quick Start
 
@@ -134,10 +134,10 @@ This repository uses tags to enforce module boundaries:
 
 | Package        | Tag             | Can Import From        |
 | -------------- | --------------- | ---------------------- |
-| `@org/utils`   | `scope:shared`  | Nothing (base library) |
-| `@org/strings` | `scope:strings` | `scope:shared`         |
-| `@org/async`   | `scope:async`   | `scope:shared`         |
-| `@org/colors`  | `scope:colors`  | `scope:shared`         |
+| `@boject/utils`   | `scope:shared`  | Nothing (base library) |
+| `@boject/strings` | `scope:strings` | `scope:shared`         |
+| `@boject/async`   | `scope:async`   | `scope:shared`         |
+| `@boject/colors`  | `scope:colors`  | `scope:shared`         |
 
 The ESLint configuration enforces these boundaries, preventing circular dependencies and maintaining clean architecture.
 
@@ -145,7 +145,7 @@ The ESLint configuration enforces these boundaries, preventing circular dependen
 
 To see module boundary enforcement in action:
 
-1. Try importing `@org/colors` into `@org/strings`
+1. Try importing `@boject/colors` into `@boject/strings`
 2. Run `npx nx lint strings`
 3. You'll see an error about violating module boundaries
 

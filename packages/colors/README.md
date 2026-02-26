@@ -1,4 +1,4 @@
-# @org/colors
+# @boject/colors
 
 Color conversion and manipulation utilities for TypeScript applications.
 
@@ -21,7 +21,7 @@ This package provides comprehensive color utilities:
 ## 📝 Usage Examples
 
 ```typescript
-import { hexToRgb, rgbToHex, lighten, darken } from '@org/colors';
+import { hexToRgb, rgbToHex, lighten, darken } from '@boject/colors';
 
 // Convert hex to RGB
 hexToRgb('#FF5733');  // { r: 255, g: 87, b: 51 }
@@ -70,9 +70,9 @@ nx lint colors     # Lint the package
 ## 🔒 Module Boundaries
 
 This package has the tag `scope:colors` and can only import from:
-- `@org/utils` (tagged with `scope:shared`)
+- `@boject/utils` (tagged with `scope:shared`)
 
-Attempting to import from `@org/strings` or `@org/async` will result in a linting error due to module boundary constraints.
+Attempting to import from `@boject/strings` or `@boject/async` will result in a linting error due to module boundary constraints.
 
 ## 🎨 Color Format Support
 

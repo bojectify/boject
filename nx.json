@@ -52,7 +52,7 @@
     }
   ],
   "release": {
-    "projects": ["!utils", "!@org/source"],
+    "projects": ["!utils", "!@boject/source"],
     "version": {
       "preVersionCommand": "npx nx run-many -t build"
     }
