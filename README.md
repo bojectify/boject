@@ -3,15 +3,16 @@
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
 ✨ A repository showcasing key [Nx](https://nx.dev) features for TypeScript monorepos ✨
+
 ## Finish your Nx platform setup
 
 🚀 [Finish setting up your workspace](https://cloud.nx.app/connect/RL2o0S0pYZ) to get faster builds with remote caching, distributed task execution, and self-healing CI. [Learn more about Nx Cloud](https://nx.dev/ci/intro/why-nx-cloud).
+
 ## 📦 Project Overview
 
 This repository demonstrates a production-ready TypeScript monorepo with:
 
 - **3 Publishable Packages** - Ready for NPM publishing
-
   - `@boject/strings` - String manipulation utilities
   - `@boject/async` - Async utility functions with retry logic
   - `@boject/colors` - Color conversion and manipulation utilities
@@ -30,19 +31,19 @@ cd typescript-template
 npm install
 
 # Build all packages
-npx nx run-many -t build
+pnpm nx run-many -t build
 
 # Run tests
-npx nx run-many -t test
+pnpm nx run-many -t test
 
 # Lint all projects
-npx nx run-many -t lint
+pnpm nx run-many -t lint
 
 # Run everything in parallel
-npx nx run-many -t lint test build --parallel=3
+pnpm nx run-many -t lint test build --parallel=3
 
 # Visualize the project graph
-npx nx graph
+pnpm nx graph
 ```
 
 ## ⭐ Featured Nx Capabilities
@@ -62,10 +63,10 @@ Enforces architectural constraints using tags. Each package has specific depende
 
 ```bash
 # See the current project graph and boundaries
-npx nx graph
+pnpm nx graph
 
 # View a specific project's details
-npx nx show project strings --web
+pnpm nx show project strings --web
 ```
 
 [Learn more about module boundaries →](https://nx.dev/features/enforce-module-boundaries)
@@ -76,10 +77,10 @@ Packages can define custom commands beyond standard build/test/lint:
 
 ```bash
 # Run the custom build-base command for strings package
-npx nx run strings:build-base
+pnpm nx run strings:build-base
 
 # See all available targets for a project
-npx nx show project strings
+pnpm nx show project strings
 ```
 
 [Learn more about custom run commands →](https://nx.dev/concepts/executors-and-configurations)
@@ -90,10 +91,10 @@ The CI pipeline includes `nx fix-ci` which automatically identifies and suggests
 
 ```bash
 # Run tests and see the failure
-npx nx test async
+pnpm nx test async
 
 # In CI, this command provides automated fixes
-npx nx fix-ci
+pnpm nx fix-ci
 ```
 
 [Learn more about self-healing CI →](https://nx.dev/ci/features/self-healing-ci)
@@ -104,13 +105,13 @@ Manage releases and publishing with Nx Release:
 
 ```bash
 # Dry run to see what would be published
-npx nx release --dry-run
+pnpm nx release --dry-run
 
 # Version and release packages
-npx nx release
+pnpm nx release
 
 # Publish only specific packages
-npx nx release publish --projects=strings,colors
+pnpm nx release publish --projects=strings,colors
 ```
 
 [Learn more about Nx Release →](https://nx.dev/features/manage-releases)
@@ -132,8 +133,8 @@ npx nx release publish --projects=strings,colors
 
 This repository uses tags to enforce module boundaries:
 
-| Package        | Tag             | Can Import From        |
-| -------------- | --------------- | ---------------------- |
+| Package           | Tag             | Can Import From        |
+| ----------------- | --------------- | ---------------------- |
 | `@boject/utils`   | `scope:shared`  | Nothing (base library) |
 | `@boject/strings` | `scope:strings` | `scope:shared`         |
 | `@boject/async`   | `scope:async`   | `scope:shared`         |
@@ -146,34 +147,36 @@ The ESLint configuration enforces these boundaries, preventing circular dependen
 To see module boundary enforcement in action:
 
 1. Try importing `@boject/colors` into `@boject/strings`
-2. Run `npx nx lint strings`
+2. Run `pnpm nx lint strings`
 3. You'll see an error about violating module boundaries
 
 ## 📚 Useful Commands
 
 ```bash
 # Project exploration
-npx nx graph                                    # Interactive dependency graph
-npx nx list                                     # List installed plugins
-npx nx show project strings --web              # View project details
+pnpm nx graph                                    # Interactive dependency graph
+pnpm nx list                                     # List installed plugins
+pnpm nx show project strings --web              # View project details
 
 # Development
-npx nx build strings                           # Build a specific package
-npx nx test async                              # Test a specific package
-npx nx lint colors                             # Lint a specific package
+pnpm nx build strings                           # Build a specific package
+pnpm nx test async                              # Test a specific package
+pnpm nx lint colors                             # Lint a specific package
 
 # Running multiple tasks
-npx nx run-many -t build                       # Build all projects
-npx nx run-many -t test --parallel=3          # Test in parallel
-npx nx run-many -t lint test build            # Run multiple targets
+pnpm nx run-many -t build                       # Build all projects
+pnpm nx run-many -t test --parallel=3          # Test in parallel
+pnpm nx run-many -t lint test build            # Run multiple targets
 
 # Affected commands (great for CI)
-npx nx affected -t build                       # Build only affected projects
-npx nx affected -t test                        # Test only affected projects
+pnpm nx affected -t build                       # Build only affected projects
+pnpm nx affected -t test                        # Test only affected projects
 
 # Release management
-npx nx release --dry-run                       # Preview release changes
-npx nx release                                 # Create a new release
+pnpm nx release --dry-run --first-release      # Preview first release
+pnpm nx release --first-release                # Create first release
+pnpm nx release --dry-run                       # Preview release changes
+pnpm nx release                                 # Create a new release
 ```
 
 ## Nx Cloud
