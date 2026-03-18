@@ -25,8 +25,8 @@ const setup = () =>
     },
     getters: {
       doubled: (state: TestState) => state.count * 2,
-      multiplied: (state: TestState, getters: { doubled: number }) =>
-        getters.doubled * state.multiplier,
+      multiplied: (state: TestState, getters: Record<string, unknown>) =>
+        (getters.doubled as number) * state.multiplier,
     },
   });
 
