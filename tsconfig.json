@@ -2,5 +2,8 @@
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
   "files": [],
-  "references": [{ "path": "./packages/react-store" }]
+  "references": [
+    { "path": "./packages/react-store" },
+    { "path": "./packages/react-store-async" }
+  ]
 }

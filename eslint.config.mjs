@@ -25,6 +25,13 @@ export default [
               sourceTag: 'scope:react-store',
               onlyDependOnLibsWithTags: ['scope:react-store'],
             },
+            {
+              sourceTag: 'scope:react-store-async',
+              onlyDependOnLibsWithTags: [
+                'scope:react-store-async',
+                'scope:react-store',
+              ],
+            },
           ],
         },
       ],
