@@ -7,10 +7,18 @@
   --boject-carousel-indicator-size: 8px;
   --boject-carousel-indicator-color: #ccc;
   --boject-carousel-indicator-active-color: #333;
+  --boject-carousel-scroll-button-opacity-enabled: 0.7;
+  --boject-carousel-scroll-button-opacity-hover: 1;
+  --boject-carousel-scroll-button-opacity-focus: 1;
+  --boject-carousel-scroll-button-opacity-disabled: 0.4;
+  --boject-carousel-scroll-button-inset: 16px;
+  --boject-carousel-indicator-gap: 8px;
+  --boject-carousel-indicator-padding-block: 16px;
 
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
   gap: var(--boject-carousel-gap);
   -webkit-overflow-scrolling: touch;
 }
@@ -23,9 +31,20 @@
   scrollbar-width: none;
 }
 
+.boject-carousel:focus-visible {
+  outline: 2px solid;
+  outline-offset: 2px;
+}
+
 .boject-carousel__slide {
   flex: 0 0 var(--boject-carousel-slide-width);
   scroll-snap-align: var(--boject-carousel-snap-align);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boject-carousel {
+    scroll-behavior: auto;
+  }
 }
 
 /* Progressive enhancement — CSS scroll buttons and markers */
@@ -35,26 +54,40 @@
     font-size: var(--boject-carousel-button-size);
     background: none;
     color: var(--boject-carousel-button-color);
-    opacity: 0.7;
+    opacity: var(--boject-carousel-scroll-button-opacity-enabled);
     cursor: pointer;
   }
 
-  .boject-carousel::scroll-button(*):hover,
+  .boject-carousel::scroll-button(*):hover {
+    opacity: var(--boject-carousel-scroll-button-opacity-hover);
+  }
   .boject-carousel::scroll-button(*):focus {
-    opacity: 1;
+    opacity: var(--boject-carousel-scroll-button-opacity-focus);
   }
 
   .boject-carousel::scroll-button(*):disabled {
-    opacity: 0.2;
+    opacity: var(--boject-carousel-scroll-button-opacity-disabled);
     cursor: default;
+  }
+
+  .boject-carousel {
+    anchor-name: --boject-carousel;
   }
 
   .boject-carousel::scroll-button(left) {
     content: '\25C0' / 'Previous';
+    position: absolute;
+    position-anchor: --boject-carousel;
+    right: calc(anchor(left) - var(--boject-carousel-scroll-button-inset));
+    align-self: anchor-center;
   }
 
   .boject-carousel::scroll-button(right) {
     content: '\25B6' / 'Next';
+    position: absolute;
+    position-anchor: --boject-carousel;
+    left: calc(anchor(right) - var(--boject-carousel-scroll-button-inset));
+    align-self: anchor-center;
   }
 
   .boject-carousel {
@@ -64,8 +97,8 @@
   .boject-carousel::scroll-marker-group {
     display: flex;
     justify-content: center;
-    gap: 8px;
-    padding-block: 8px;
+    gap: var(--boject-carousel-indicator-gap);
+    padding-block: var(--boject-carousel-indicator-padding-block);
   }
 
   .boject-carousel > *::scroll-marker {
@@ -80,5 +113,13 @@
 
   .boject-carousel > *::scroll-marker:target-current {
     background-color: var(--boject-carousel-indicator-active-color);
+    transform: scale(1.5);
+  }
+
+  /* Hide scroll buttons on touch devices — swipe is the natural gesture */
+  @media (pointer: coarse) {
+    .boject-carousel::scroll-button(*) {
+      display: none;
+    }
   }
 }

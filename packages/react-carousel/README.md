@@ -80,6 +80,26 @@ All other HTML attributes are spread onto the root element of both components.
 - Scroll container: `role="region"`, `aria-roledescription="carousel"`, `tabindex="0"`
 - Each slide: `role="group"`, `aria-roledescription="slide"`
 - Keyboard navigable via Tab + arrow keys
+- Respects `prefers-reduced-motion` (disables smooth scrolling)
+- Active scroll marker has a size difference (not just color) for color-blind users
+
+### Labelling slides
+
+Each `<Carousel.Slide>` should have an `aria-label` describing its content or position so screen readers can distinguish between slides:
+
+```tsx
+<Carousel aria-label="Product images">
+  <Carousel.Slide aria-label="1 of 3">...</Carousel.Slide>
+  <Carousel.Slide aria-label="2 of 3">...</Carousel.Slide>
+  <Carousel.Slide aria-label="3 of 3">...</Carousel.Slide>
+</Carousel>
+```
+
+Don't include the word "slide" in the label — `aria-roledescription` already conveys that.
+
+### Interactive content in slides
+
+If slides contain interactive elements (links, buttons, form controls), keyboard users may be able to Tab to elements in off-screen slides. For carousels with interactive slide content, consider managing `tabIndex` on off-screen slides via JavaScript.
 
 ## Requirements
 

@@ -21,9 +21,17 @@ const colors = [
   '#1abc9c',
 ];
 
-function Slide({ index, label }: { index: number; label?: string }) {
+function Slide({
+  index,
+  label,
+  'aria-label': ariaLabel,
+}: {
+  index: number;
+  label?: string;
+  'aria-label'?: string;
+}) {
   return (
-    <Carousel.Slide>
+    <Carousel.Slide aria-label={ariaLabel}>
       <div
         style={{
           ...slideStyle,
@@ -42,6 +50,28 @@ const meta: Meta<typeof Carousel> = {
   parameters: {
     layout: 'padded',
   },
+  decorators: [
+    (Story) => (
+      <>
+        <style>{`
+        .container {
+          box-sizing: border-box;
+          width: 100%;
+          max-width: 1440px;
+          margin: 0 auto;
+          padding: 0 8px;
+
+          @media (min-width: 640px) {
+            padding: 0 16px;
+          }
+        }
+      `}</style>
+        <div className="container">
+          <Story />
+        </div>
+      </>
+    ),
+  ],
 };
 
 export default meta;
@@ -50,9 +80,9 @@ type Story = StoryObj<typeof Carousel>;
 export const Default: Story = {
   render: () => (
     <Carousel>
-      <Slide index={0} />
-      <Slide index={1} />
-      <Slide index={2} />
+      <Slide index={0} aria-label="1 of 3" />
+      <Slide index={1} aria-label="2 of 3" />
+      <Slide index={2} aria-label="3 of 3" />
     </Carousel>
   ),
 };
@@ -90,6 +120,34 @@ export const PartialSlideWidth: Story = {
         <Slide index={4} />
       </Carousel>
     </div>
+  ),
+};
+
+export const ResponsiveSlides: Story = {
+  name: 'Responsive (1 → 2 → 3 per breakpoint)',
+  render: () => (
+    <>
+      <style>{`
+        .responsive-carousel {
+          --boject-carousel-slide-width: 100%;
+        }
+        @media (min-width: 640px) {
+          .responsive-carousel {
+            --boject-carousel-slide-width: calc((50% - var(--boject-carousel-gap) / 2) - 5%);
+          }
+        }
+        @media (min-width: 1024px) {
+          .responsive-carousel {
+            --boject-carousel-slide-width: calc(33.333% - var(--boject-carousel-gap) * 2 / 3);
+          }
+        }
+      `}</style>
+      <Carousel className="responsive-carousel">
+        {Array.from({ length: 6 }, (_, i) => (
+          <Slide key={i} index={i} />
+        ))}
+      </Carousel>
+    </>
   ),
 };
 
