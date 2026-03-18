@@ -1,34 +1,23 @@
-# Nx TypeScript Repository
+# @boject
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Open source React component library monorepo, managed by [Nx](https://nx.dev) with pnpm.
 
-✨ A repository showcasing key [Nx](https://nx.dev) features for TypeScript monorepos ✨
+## Packages
 
-## Finish your Nx platform setup
+| Package                                                   | Description                                                | RSC-Compatible |
+| --------------------------------------------------------- | ---------------------------------------------------------- | -------------- |
+| [`@boject/react-store`](packages/react-store)             | useReducer + Context with Vuex-style computed getters      | No (client)    |
+| [`@boject/react-store-async`](packages/react-store-async) | Async fetch helpers (REQUEST/SUCCESS/ERROR)                | No (client)    |
+| [`@boject/react-reveal`](packages/react-reveal)           | CSS animation wrapper (fade + slide)                       | Yes            |
+| [`@boject/react-carousel`](packages/react-carousel)       | CSS-only scroll-snap carousel with progressive enhancement | Yes            |
 
-🚀 [Finish setting up your workspace](https://cloud.nx.app/connect/RL2o0S0pYZ) to get faster builds with remote caching, distributed task execution, and self-healing CI. [Learn more about Nx Cloud](https://nx.dev/ci/intro/why-nx-cloud).
+## Getting Started
 
-## 📦 Project Overview
-
-This repository demonstrates a production-ready TypeScript monorepo with:
-
-- **3 Publishable Packages** - Ready for NPM publishing
-  - `@boject/strings` - String manipulation utilities
-  - `@boject/async` - Async utility functions with retry logic
-  - `@boject/colors` - Color conversion and manipulation utilities
-
-- **1 Internal Library**
-  - `@boject/utils` - Shared utilities (private, not published)
-
-## 🚀 Quick Start
+**Prerequisites:** Node.js 20+, pnpm
 
 ```bash
-# Clone the repository
-git clone <your-fork-url>
-cd typescript-template
-
 # Install dependencies
-npm install
+pnpm install
 
 # Build all packages
 pnpm nx run-many -t build
@@ -36,173 +25,84 @@ pnpm nx run-many -t build
 # Run tests
 pnpm nx run-many -t test
 
-# Lint all projects
+# Lint
 pnpm nx run-many -t lint
 
-# Run everything in parallel
-pnpm nx run-many -t lint test build --parallel=3
+# Typecheck
+pnpm nx run-many -t typecheck
 
-# Visualize the project graph
-pnpm nx graph
+# Run everything
+pnpm nx run-many -t lint test build typecheck
 ```
 
-## ⭐ Featured Nx Capabilities
+## Development
 
-This repository showcases several powerful Nx features:
+### Storybook
 
-### 1. 🔒 Module Boundaries
-
-Enforces architectural constraints using tags. Each package has specific dependencies it can use:
-
-- `scope:shared` (utils) - Can be used by all packages
-- `scope:strings` - Can only depend on shared utilities
-- `scope:async` - Can only depend on shared utilities
-- `scope:colors` - Can only depend on shared utilities
-
-**Try it out:**
+Visual development for component packages:
 
 ```bash
-# See the current project graph and boundaries
-pnpm nx graph
-
-# View a specific project's details
-pnpm nx show project strings --web
+pnpm nx storybook @boject/react-carousel
+pnpm nx storybook @boject/react-reveal
 ```
 
-[Learn more about module boundaries →](https://nx.dev/features/enforce-module-boundaries)
-
-### 2. 🛠️ Custom Run Commands
-
-Packages can define custom commands beyond standard build/test/lint:
+### Working on a single package
 
 ```bash
-# Run the custom build-base command for strings package
-pnpm nx run strings:build-base
-
-# See all available targets for a project
-pnpm nx show project strings
+pnpm nx build @boject/react-store
+pnpm nx test @boject/react-reveal
+pnpm nx lint @boject/react-carousel
 ```
 
-[Learn more about custom run commands →](https://nx.dev/concepts/executors-and-configurations)
+### Affected commands
 
-### 3. 🔧 Self-Healing CI
-
-The CI pipeline includes `nx fix-ci` which automatically identifies and suggests fixes for common issues. To test it, you can make a change to `async-retry.spec.ts` so that it fails, and create a PR.
+Only run tasks for projects affected by your changes:
 
 ```bash
-# Run tests and see the failure
-pnpm nx test async
-
-# In CI, this command provides automated fixes
-pnpm nx fix-ci
+pnpm nx affected -t test
+pnpm nx affected -t build
 ```
 
-[Learn more about self-healing CI →](https://nx.dev/ci/features/self-healing-ci)
+## Project Structure
 
-### 4. 📦 Package Publishing
+```
+packages/
+  react-store/        @boject/react-store         — State management with computed getters
+  react-store-async/  @boject/react-store-async   — Async fetch action helpers
+  react-reveal/       @boject/react-reveal        — CSS animation wrapper
+  react-carousel/     @boject/react-carousel      — CSS-only scroll-snap carousel
+```
 
-Manage releases and publishing with Nx Release:
+### Module Boundaries
+
+- `react-store-async` can depend on `react-store`
+- All other packages are independent
+
+### Tech Stack
+
+- **Nx 22.x** — monorepo tooling
+- **pnpm** — package manager
+- **TypeScript 5.9** — strict mode, nodenext module resolution
+- **tsup** — ESM bundler for all packages
+- **Vitest** — testing with @testing-library/react
+- **Storybook 10** — component development (react-reveal, react-carousel)
+- **Lefthook** — git hooks (lint + format on commit, test + build on push)
+- **Prettier** — code formatting
+
+## Publishing
 
 ```bash
-# Dry run to see what would be published
+# Dry run
 pnpm nx release --dry-run
 
-# Version and release packages
+# Local testing with Verdaccio
+pnpm nx local-registry
+pnpm nx release publish --registry=http://localhost:4873
+
+# Release to NPM
 pnpm nx release
-
-# Publish only specific packages
-pnpm nx release publish --projects=strings,colors
 ```
 
-[Learn more about Nx Release →](https://nx.dev/features/manage-releases)
+## License
 
-## 📁 Project Structure
-
-```
-├── packages/
-│   ├── strings/     [scope:strings] - String utilities (publishable)
-│   ├── async/       [scope:async]   - Async utilities (publishable)
-│   ├── colors/      [scope:colors]  - Color utilities (publishable)
-│   └── utils/       [scope:shared]  - Shared utilities (private)
-├── nx.json          - Nx configuration
-├── tsconfig.json    - TypeScript configuration
-└── eslint.config.mjs - ESLint with module boundary rules
-```
-
-## 🏷️ Understanding Tags
-
-This repository uses tags to enforce module boundaries:
-
-| Package           | Tag             | Can Import From        |
-| ----------------- | --------------- | ---------------------- |
-| `@boject/utils`   | `scope:shared`  | Nothing (base library) |
-| `@boject/strings` | `scope:strings` | `scope:shared`         |
-| `@boject/async`   | `scope:async`   | `scope:shared`         |
-| `@boject/colors`  | `scope:colors`  | `scope:shared`         |
-
-The ESLint configuration enforces these boundaries, preventing circular dependencies and maintaining clean architecture.
-
-## 🧪 Testing Module Boundaries
-
-To see module boundary enforcement in action:
-
-1. Try importing `@boject/colors` into `@boject/strings`
-2. Run `pnpm nx lint strings`
-3. You'll see an error about violating module boundaries
-
-## 📚 Useful Commands
-
-```bash
-# Project exploration
-pnpm nx graph                                    # Interactive dependency graph
-pnpm nx list                                     # List installed plugins
-pnpm nx show project strings --web              # View project details
-
-# Development
-pnpm nx build strings                           # Build a specific package
-pnpm nx test async                              # Test a specific package
-pnpm nx lint colors                             # Lint a specific package
-
-# Running multiple tasks
-pnpm nx run-many -t build                       # Build all projects
-pnpm nx run-many -t test --parallel=3          # Test in parallel
-pnpm nx run-many -t lint test build            # Run multiple targets
-
-# Affected commands (great for CI)
-pnpm nx affected -t build                       # Build only affected projects
-pnpm nx affected -t test                        # Test only affected projects
-
-# Release management
-pnpm nx release --dry-run --first-release      # Preview first release
-pnpm nx release --first-release                # Create first release
-pnpm nx release --dry-run                       # Preview release changes
-pnpm nx release                                 # Create a new release
-```
-
-## Nx Cloud
-
-Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## 🔗 Learn More
-
-- [Nx Documentation](https://nx.dev)
-- [Module Boundaries](https://nx.dev/features/enforce-module-boundaries)
-- [Custom Commands](https://nx.dev/concepts/executors-and-configurations)
-- [Self-Healing CI](https://nx.dev/ci/features/self-healing-ci)
-- [Releasing Packages](https://nx.dev/features/manage-releases)
-- [Nx Cloud](https://nx.dev/ci/intro/why-nx-cloud)
-
-## 💬 Community
-
-Join the Nx community:
-
-- [Discord](https://go.nx.dev/community)
-- [X (Twitter)](https://twitter.com/nxdevtools)
-- [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [YouTube](https://www.youtube.com/@nxdevtools)
-- [Blog](https://nx.dev/blog)
+MIT

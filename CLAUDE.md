@@ -4,25 +4,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-TypeScript monorepo (`@boject`) managed by Nx 22.x with pnpm. Contains 3 publishable NPM packages and 1 private shared library under `packages/`.
+React component library monorepo (`@boject`) managed by Nx 22.x with pnpm. Contains 4 publishable NPM packages under `packages/`.
 
-| Package | Tag | Published | Description |
-|---|---|---|---|
-| `@boject/strings` | `scope:strings` | Yes | String manipulation (slugify, capitalize) |
-| `@boject/async` | `scope:async` | Yes | Async retry utilities |
-| `@boject/colors` | `scope:colors` | Yes | Color conversion/manipulation |
-| `@boject/utils` | `scope:shared` | No | Shared type validation (private) |
+| Package                     | Tag                       | Description                                           |
+| --------------------------- | ------------------------- | ----------------------------------------------------- |
+| `@boject/react-store`       | `scope:react-store`       | useReducer + Context with Vuex-style computed getters |
+| `@boject/react-store-async` | `scope:react-store-async` | Async fetch helpers (REQUEST/SUCCESS/ERROR pattern)   |
+| `@boject/react-reveal`      | `scope:react-reveal`      | CSS animation wrapper (fade/slide, RSC-compatible)    |
+| `@boject/react-carousel`    | `scope:react-carousel`    | CSS-only scroll-snap carousel (RSC-compatible)        |
 
 ## Commands
 
 Always use `pnpm nx` (never a global `nx` install).
 
 ```bash
-# Build / Test / Lint a single project
-pnpm nx build strings
-pnpm nx test async
-pnpm nx lint colors
-pnpm nx typecheck strings
+# Build / Test / Lint / Typecheck a single project
+pnpm nx build @boject/react-store
+pnpm nx test @boject/react-reveal
+pnpm nx lint @boject/react-carousel
+pnpm nx typecheck @boject/react-store-async
 
 # Run across all projects
 pnpm nx run-many -t build
@@ -35,11 +35,18 @@ pnpm nx affected -t test
 pnpm nx format:check
 pnpm nx format:write
 
+# Storybook (react-carousel and react-reveal only)
+pnpm nx storybook @boject/react-carousel
+pnpm nx storybook @boject/react-reveal
+
 # Release (dry run)
 pnpm nx release --dry-run
+
+# Local registry (Verdaccio)
+pnpm nx local-registry
 ```
 
-Nx project names are the bare package names (e.g. `strings`, not `@boject/strings`). Verify with `pnpm nx show projects`.
+Nx project names include the scope (e.g. `@boject/react-store`). Verify with `pnpm nx show projects`.
 
 ## Architecture
 
@@ -47,40 +54,59 @@ Nx project names are the bare package names (e.g. `strings`, not `@boject/string
 
 Enforced via `@nx/enforce-module-boundaries` in the root `eslint.config.mjs`:
 
-- `scope:shared` (utils) — cannot import any other workspace package
-- `scope:strings`, `scope:async`, `scope:colors` — can only import from `scope:shared`
+- `scope:react-store-async` — can import from `scope:react-store`
+- `scope:react-store`, `scope:react-reveal`, `scope:react-carousel` — independent, no cross-package deps
 
-Cross-package imports between strings/async/colors are forbidden. Run `pnpm nx lint <project>` to verify.
+Run `pnpm nx lint <project>` to verify.
+
+### Build Tooling
+
+- **tsup** bundles all packages (ESM-only, with TypeScript declarations)
+- Component packages (react-reveal, react-carousel) also copy `src/styles.css` to `dist/styles.css` as a post-build step
+- `@nx/js/typescript` plugin handles `typecheck` target only (not builds)
+- `@nx/vite/plugin` target names are prefixed with `vite-` to avoid conflicts with custom tsup build targets
 
 ### TypeScript Setup
 
 - **Project references** wired through root `tsconfig.json` → per-package `tsconfig.lib.json`
 - **Custom condition `@boject/source`** in `tsconfig.base.json` enables importing TypeScript source directly during development (no build step needed). Each package.json exports map includes `"@boject/source": "./src/index.ts"`.
+- **JSX**: `react-jsx` (automatic runtime)
 - Build output goes to `packages/<name>/dist/`
 - Module: `nodenext`, Target: `es2022`, strict mode enabled
+
+### CSS Strategy
+
+- Plain CSS (not CSS Modules) with `--boject-` prefixed class names
+- Components import their own CSS (`import './styles.css'`)
+- CSS custom properties provide theming API (e.g. `--boject-reveal-duration`, `--boject-carousel-gap`)
+- Component packages use `"sideEffects": ["*.css"]` in package.json
 
 ### Testing
 
 - **Vitest** via `@nx/vitest` plugin. Config per-package in `vite.config.ts`.
+- **@testing-library/react** for component packages (jsdom environment)
+- **Node environment** for store-async (pure functions, no DOM)
 - Workspace-level config in `vitest.workspace.ts`
-- Test files: `src/**/*.{test,spec}.{ts,js,...}`
+- Test files: `src/**/*.{test,spec}.{ts,tsx}`
 - Coverage: v8 provider → `./test-output/vitest/coverage`
-- Note: `utils` package has no tests
 
-### Build Pipeline
+### Storybook
 
-- `build` target uses `tsc` via `@nx/js/typescript` plugin
-- `strings` has an extra `build-base` target that runs before `build`
-- `test` depends on `^build` (dependencies are built first)
+- **Storybook 10** configured on react-carousel and react-reveal via `@nx/storybook` plugin
+- Stories co-located with components: `src/*.stories.tsx`
+- Uses `@storybook/react-vite` framework with `@vitejs/plugin-react`
 
 ### Nx Config
 
 - All project configuration lives in each `package.json` under the `"nx"` field — there are no `project.json` files
-- Nx plugins (`@nx/js/typescript`, `@nx/vite/plugin`, `@nx/eslint/plugin`) infer targets automatically
-- Release excludes `utils` (configured in `nx.json` → `release.projects: ["!utils"]`)
+- Nx plugins (`@nx/js/typescript`, `@nx/vite/plugin`, `@nx/eslint/plugin`, `@nx/vitest`, `@nx/storybook/plugin`) infer targets automatically
+- Release excludes root package (configured in `nx.json` → `release.projects: ["!@boject/source"]`)
+- `test` depends on `^build` (dependencies are built first)
 
-<!-- nx configuration start-->
-<!-- Leave the start & end comments to automatically receive updates. -->
+### Git Hooks (Lefthook)
+
+- **pre-commit**: lint + format check (affected, uncommitted)
+- **pre-push**: test + typecheck + build (affected, vs origin/main)
 
 ## General Guidelines for working with Nx
 
@@ -100,5 +126,3 @@ Cross-package imports between strings/async/colors are forbidden. Run `pnpm nx l
 - USE for: advanced config options, unfamiliar flags, migration guides, plugin configuration, edge cases
 - DON'T USE for: basic generator syntax (`nx g @nx/react:app`), standard commands, things you already know
 - The `nx-generate` skill handles generator discovery internally - don't call nx_docs just to look up generator syntax
-
-<!-- nx configuration end-->
