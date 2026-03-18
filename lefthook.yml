@@ -1,0 +1,22 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: lint
+      glob: '*.{ts,js,mjs}'
+      run: pnpm nx affected -t lint --uncommitted
+
+    - name: format
+      glob: '*.{ts,js,mjs,json,md,yml}'
+      run: pnpm nx format:check --uncommitted
+
+pre-push:
+  parallel: true
+  jobs:
+    - name: test
+      run: pnpm nx affected -t test --base=origin/main
+
+    - name: typecheck
+      run: pnpm nx affected -t typecheck --base=origin/main
+
+    - name: build
+      run: pnpm nx affected -t build --base=origin/main
