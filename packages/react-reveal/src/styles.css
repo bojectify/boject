@@ -1,0 +1,30 @@
+.boject-reveal {
+  --boject-reveal-duration: 800ms;
+  --boject-reveal-delay: 0ms;
+  --boject-reveal-distance: 36px;
+  --boject-reveal-easing: ease-out;
+}
+
+.boject-reveal--fade {
+  opacity: 0;
+  animation: boject-reveal-fade-in var(--boject-reveal-duration) var(--boject-reveal-easing) var(--boject-reveal-delay) forwards;
+}
+
+.boject-reveal--slide {
+  animation: boject-reveal-slide var(--boject-reveal-duration) var(--boject-reveal-easing) var(--boject-reveal-delay) forwards;
+}
+
+@keyframes boject-reveal-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes boject-reveal-slide {
+  100% {
+    transform: translate(0);
+  }
+}

@@ -105,6 +105,16 @@ importers:
         specifier: 4.0.9
         version: 4.0.9(@types/node@20.19.9)(@vitest/ui@4.0.9)(jiti@2.4.2)(jsdom@29.0.0)(yaml@2.8.2)
 
+  packages/react-reveal:
+    dependencies:
+      react:
+        specifier: '>=18.0.0'
+        version: 19.2.4
+    devDependencies:
+      vite:
+        specifier: ^7.0.0
+        version: 7.3.1(@types/node@20.19.9)(jiti@2.4.2)(yaml@2.8.2)
+
   packages/react-store:
     dependencies:
       react:

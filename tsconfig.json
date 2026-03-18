@@ -4,6 +4,7 @@
   "files": [],
   "references": [
     { "path": "./packages/react-store" },
-    { "path": "./packages/react-store-async" }
+    { "path": "./packages/react-store-async" },
+    { "path": "./packages/react-reveal" }
   ]
 }

@@ -32,6 +32,10 @@ export default [
                 'scope:react-store',
               ],
             },
+            {
+              sourceTag: 'scope:react-reveal',
+              onlyDependOnLibsWithTags: ['scope:react-reveal'],
+            },
           ],
         },
       ],
