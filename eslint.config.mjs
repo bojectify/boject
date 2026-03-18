@@ -20,7 +20,12 @@ export default [
         {
           enforceBuildableLibDependency: true,
           allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
-          depConstraints: [],
+          depConstraints: [
+            {
+              sourceTag: 'scope:react-store',
+              onlyDependOnLibsWithTags: ['scope:react-store'],
+            },
+          ],
         },
       ],
     },
