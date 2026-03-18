@@ -16,26 +16,20 @@
       "options": {
         "typecheck": {
           "targetName": "typecheck"
-        },
-        "build": {
-          "targetName": "build",
-          "configName": "tsconfig.lib.json",
-          "buildDepsName": "build-deps",
-          "watchDepsName": "watch-deps"
         }
       }
     },
     {
       "plugin": "@nx/vite/plugin",
       "options": {
-        "buildTargetName": "build",
+        "buildTargetName": "vite-build",
         "serveTargetName": "serve",
         "devTargetName": "dev",
         "previewTargetName": "preview",
         "serveStaticTargetName": "serve-static",
-        "typecheckTargetName": "typecheck",
-        "buildDepsTargetName": "build-deps",
-        "watchDepsTargetName": "watch-deps"
+        "typecheckTargetName": "vite-typecheck",
+        "buildDepsTargetName": "vite-build-deps",
+        "watchDepsTargetName": "vite-watch-deps"
       }
     },
     {
@@ -52,7 +46,7 @@
     }
   ],
   "release": {
-    "projects": ["!utils", "!@boject/source"],
+    "projects": ["!@boject/source"],
     "version": {
       "preVersionCommand": "npx nx run-many -t build"
     }
