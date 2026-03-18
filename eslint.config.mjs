@@ -36,6 +36,10 @@ export default [
               sourceTag: 'scope:react-reveal',
               onlyDependOnLibsWithTags: ['scope:react-reveal'],
             },
+            {
+              sourceTag: 'scope:react-carousel',
+              onlyDependOnLibsWithTags: ['scope:react-carousel'],
+            },
           ],
         },
       ],

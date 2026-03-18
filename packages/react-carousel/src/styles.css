@@ -1,0 +1,84 @@
+.boject-carousel {
+  --boject-carousel-gap: 16px;
+  --boject-carousel-slide-width: 100%;
+  --boject-carousel-snap-align: start;
+  --boject-carousel-button-size: 2rem;
+  --boject-carousel-button-color: currentColor;
+  --boject-carousel-indicator-size: 8px;
+  --boject-carousel-indicator-color: #ccc;
+  --boject-carousel-indicator-active-color: #333;
+
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: var(--boject-carousel-gap);
+  -webkit-overflow-scrolling: touch;
+}
+
+.boject-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.boject-carousel {
+  scrollbar-width: none;
+}
+
+.boject-carousel__slide {
+  flex: 0 0 var(--boject-carousel-slide-width);
+  scroll-snap-align: var(--boject-carousel-snap-align);
+}
+
+/* Progressive enhancement — CSS scroll buttons and markers */
+@supports selector(::scroll-button(right)) {
+  .boject-carousel::scroll-button(*) {
+    border: 0;
+    font-size: var(--boject-carousel-button-size);
+    background: none;
+    color: var(--boject-carousel-button-color);
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
+  .boject-carousel::scroll-button(*):hover,
+  .boject-carousel::scroll-button(*):focus {
+    opacity: 1;
+  }
+
+  .boject-carousel::scroll-button(*):disabled {
+    opacity: 0.2;
+    cursor: default;
+  }
+
+  .boject-carousel::scroll-button(left) {
+    content: '\25C0' / 'Previous';
+  }
+
+  .boject-carousel::scroll-button(right) {
+    content: '\25B6' / 'Next';
+  }
+
+  .boject-carousel {
+    scroll-marker-group: after;
+  }
+
+  .boject-carousel::scroll-marker-group {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding-block: 8px;
+  }
+
+  .boject-carousel > *::scroll-marker {
+    content: '';
+    width: var(--boject-carousel-indicator-size);
+    height: var(--boject-carousel-indicator-size);
+    border-radius: 50%;
+    background-color: var(--boject-carousel-indicator-color);
+    border: 0;
+    cursor: pointer;
+  }
+
+  .boject-carousel > *::scroll-marker:target-current {
+    background-color: var(--boject-carousel-indicator-active-color);
+  }
+}

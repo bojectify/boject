@@ -5,6 +5,7 @@
   "references": [
     { "path": "./packages/react-store" },
     { "path": "./packages/react-store-async" },
-    { "path": "./packages/react-reveal" }
+    { "path": "./packages/react-reveal" },
+    { "path": "./packages/react-carousel" }
   ]
 }
