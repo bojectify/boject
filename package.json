@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "storybook:react-carousel": "nx storybook @boject/react-carousel --port=${PORT:-50262}",
+    "storybook:react-reveal": "nx storybook @boject/react-reveal --port=${PORT:-55511}",
     "prepare": "lefthook install"
   },
   "private": true,
@@ -15,8 +17,9 @@
     "@nx/vite": "22.5.2",
     "@nx/vitest": "22.5.2",
     "@nx/web": "22.5.4",
-    "@storybook/react": "10.2.19",
-    "@storybook/react-vite": "10.2.19",
+    "@storybook/addon-vitest": "^10.3.1",
+    "@storybook/react": "10.3.1",
+    "@storybook/react-vite": "10.3.1",
     "@swc-node/register": "1.11.1",
     "@swc/core": "1.15.8",
     "@swc/helpers": "0.5.18",
@@ -25,8 +28,10 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.7.0",
-    "@vitest/coverage-v8": "4.0.9",
-    "@vitest/ui": "4.0.9",
+    "@vitest/browser": "4.1.0",
+    "@vitest/browser-playwright": "4.1.0",
+    "@vitest/coverage-v8": "4.1.0",
+    "@vitest/ui": "4.1.0",
     "eslint": "~8.57.0",
     "jiti": "2.4.2",
     "jsdom": "^29.0.0",
@@ -36,7 +41,9 @@
     "prettier": "~3.6.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "storybook": "10.2.19",
+    "storybook": "10.3.1",
+    "stylelint": "^17.5.0",
+    "stylelint-config-standard": "^40.0.0",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
     "tsup": "^8.5.1",
@@ -44,7 +51,7 @@
     "typescript-eslint": "^8.40.0",
     "verdaccio": "^6.0.5",
     "vite": "^7.0.0",
-    "vitest": "4.0.9"
+    "vitest": "4.1.0"
   },
   "nx": {
     "includedScripts": [],

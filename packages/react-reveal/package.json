@@ -32,6 +32,29 @@
       "scope:react-reveal"
     ],
     "targets": {
+      "test-storybook": {
+        "command": "vitest run --config vitest.config.storybook.ts",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "cache": true,
+        "inputs": [
+          "{projectRoot}/src/**/*.stories.{ts,tsx}",
+          "{projectRoot}/.storybook/**/*",
+          "{projectRoot}/vitest.config.storybook.ts"
+        ]
+      },
+      "stylelint": {
+        "command": "stylelint \"src/**/*.css\"",
+        "options": {
+          "cwd": "{projectRoot}"
+        },
+        "cache": true,
+        "inputs": [
+          "{projectRoot}/src/**/*.css",
+          "{workspaceRoot}/.stylelintrc.json"
+        ]
+      },
       "build": {
         "command": "tsup && cp src/styles.css dist/styles.css",
         "options": {

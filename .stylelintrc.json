@@ -1,0 +1,57 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "selector-class-pattern": [
+      "^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$",
+      {
+        "message": "Expected class selector to be BEM (block__element--modifier)"
+      }
+    ],
+    "selector-type-no-unknown": [
+      true,
+      {
+        "ignoreTypes": ["left", "right"]
+      }
+    ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": [
+          "scroll-button",
+          "scroll-marker",
+          "scroll-marker-group"
+        ]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["target-current"]
+      }
+    ],
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": [
+          "anchor-name",
+          "position-anchor",
+          "scroll-marker-group"
+        ]
+      }
+    ],
+    "value-keyword-case": [
+      "lower",
+      {
+        "ignoreKeywords": ["currentColor"]
+      }
+    ],
+    "no-duplicate-selectors": null,
+    "rule-empty-line-before": [
+      "always-multi-line",
+      {
+        "except": ["first-nested"],
+        "ignore": ["after-comment", "inside-block"]
+      }
+    ]
+  }
+}

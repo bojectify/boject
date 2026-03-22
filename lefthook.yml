@@ -5,6 +5,10 @@ pre-commit:
       glob: '*.{ts,js,mjs}'
       run: pnpm nx affected -t lint --uncommitted
 
+    - name: stylelint
+      glob: '*.css'
+      run: pnpm nx affected -t stylelint --uncommitted
+
     - name: format
       glob: '*.{ts,js,mjs,json,md,yml}'
       run: pnpm nx format:check --uncommitted
