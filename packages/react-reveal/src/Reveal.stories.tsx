@@ -33,7 +33,7 @@ export const Default: Story = {
 export const DirectionUp: Story = {
   name: 'Direction: Up',
   render: () => (
-    <Reveal direction="up">
+    <Reveal distance="36px" direction="up">
       <div style={boxStyle}>Slide Up</div>
     </Reveal>
   ),
@@ -42,7 +42,7 @@ export const DirectionUp: Story = {
 export const DirectionDown: Story = {
   name: 'Direction: Down',
   render: () => (
-    <Reveal direction="down">
+    <Reveal distance="36px" direction="down">
       <div style={boxStyle}>Slide Down</div>
     </Reveal>
   ),
@@ -51,7 +51,7 @@ export const DirectionDown: Story = {
 export const DirectionLeft: Story = {
   name: 'Direction: Left',
   render: () => (
-    <Reveal direction="left">
+    <Reveal distance="36px" direction="left">
       <div style={boxStyle}>Slide Left</div>
     </Reveal>
   ),
@@ -60,7 +60,7 @@ export const DirectionLeft: Story = {
 export const DirectionRight: Story = {
   name: 'Direction: Right',
   render: () => (
-    <Reveal direction="right">
+    <Reveal distance="36px" direction="right">
       <div style={boxStyle}>Slide Right</div>
     </Reveal>
   ),
@@ -78,7 +78,7 @@ export const FadeOnly: Story = {
 export const SlideOnly: Story = {
   name: 'Slide Only (no fade)',
   render: () => (
-    <Reveal fadeIn={false}>
+    <Reveal distance="36px" fadeIn={false}>
       <div style={boxStyle}>Slide Only</div>
     </Reveal>
   ),
@@ -87,7 +87,7 @@ export const SlideOnly: Story = {
 export const SlowDuration: Story = {
   name: 'Slow Duration (2s)',
   render: () => (
-    <Reveal duration={2000}>
+    <Reveal distance="36px" duration={2000}>
       <div style={boxStyle}>Slow Animation</div>
     </Reveal>
   ),
@@ -96,7 +96,7 @@ export const SlowDuration: Story = {
 export const WithDelay: Story = {
   name: 'Delayed Start (500ms)',
   render: () => (
-    <Reveal delay={500}>
+    <Reveal distance="36px" delay={500}>
       <div style={boxStyle}>Delayed Reveal</div>
     </Reveal>
   ),
@@ -105,7 +105,7 @@ export const WithDelay: Story = {
 export const CustomElement: Story = {
   name: 'As <section>',
   render: () => (
-    <Reveal as="section">
+    <Reveal distance="36px" as="section">
       <div style={boxStyle}>Rendered as a section element</div>
     </Reveal>
   ),

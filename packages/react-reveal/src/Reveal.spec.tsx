@@ -30,7 +30,7 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.className).toContain('boject-reveal--fade');
+    expect(el.className).toContain('boject-reveal--fade-in');
   });
 
   it('does not apply fade class when fadeIn is false', () => {
@@ -40,27 +40,27 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.className).not.toContain('boject-reveal--fade');
+    expect(el.className).not.toContain('boject-reveal--fade-in');
   });
 
-  it('applies slide class when distance is non-zero', () => {
+  it('applies transform class when distance is non-zero', () => {
     render(
       <Reveal data-testid="reveal" distance="50px">
         Hello
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.className).toContain('boject-reveal--slide');
+    expect(el.className).toContain('boject-reveal--transform');
   });
 
-  it('does not apply slide class when distance is 0', () => {
+  it('does not apply transform class when distance is 0', () => {
     render(
       <Reveal data-testid="reveal" distance="0">
         Hello
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.className).not.toContain('boject-reveal--slide');
+    expect(el.className).not.toContain('boject-reveal--transform');
   });
 
   it('sets CSS custom properties from props', () => {
@@ -75,42 +75,70 @@ describe('Reveal', () => {
     expect(el.style.getPropertyValue('--boject-reveal-distance')).toBe('50px');
   });
 
+  it('sets easing CSS custom property from prop', () => {
+    render(
+      <Reveal data-testid="reveal" easing="cubic-bezier(0.4, 0, 0.2, 1)">
+        Hello
+      </Reveal>
+    );
+    const el = screen.getByTestId('reveal');
+    expect(el.style.getPropertyValue('--boject-reveal-easing')).toBe(
+      'cubic-bezier(0.4, 0, 0.2, 1)'
+    );
+  });
+
+  it('defaults easing to ease-out', () => {
+    render(<Reveal data-testid="reveal">Hello</Reveal>);
+    const el = screen.getByTestId('reveal');
+    expect(el.style.getPropertyValue('--boject-reveal-easing')).toBe(
+      'ease-out'
+    );
+  });
+
   it('sets correct transform for each direction', () => {
     const { rerender } = render(
       <Reveal data-testid="reveal" direction="up" distance="36px">
         Up
       </Reveal>
     );
-    expect(screen.getByTestId('reveal').style.transform).toBe(
-      'translateY(36px)'
-    );
+    expect(
+      screen
+        .getByTestId('reveal')
+        .style.getPropertyValue('--boject-reveal-transform')
+    ).toBe('translateY(36px)');
 
     rerender(
       <Reveal data-testid="reveal" direction="down" distance="36px">
         Down
       </Reveal>
     );
-    expect(screen.getByTestId('reveal').style.transform).toBe(
-      'translateY(-36px)'
-    );
+    expect(
+      screen
+        .getByTestId('reveal')
+        .style.getPropertyValue('--boject-reveal-transform')
+    ).toBe('translateY(-36px)');
 
     rerender(
       <Reveal data-testid="reveal" direction="left" distance="36px">
         Left
       </Reveal>
     );
-    expect(screen.getByTestId('reveal').style.transform).toBe(
-      'translateX(36px)'
-    );
+    expect(
+      screen
+        .getByTestId('reveal')
+        .style.getPropertyValue('--boject-reveal-transform')
+    ).toBe('translateX(36px)');
 
     rerender(
       <Reveal data-testid="reveal" direction="right" distance="36px">
         Right
       </Reveal>
     );
-    expect(screen.getByTestId('reveal').style.transform).toBe(
-      'translateX(-36px)'
-    );
+    expect(
+      screen
+        .getByTestId('reveal')
+        .style.getPropertyValue('--boject-reveal-transform')
+    ).toBe('translateX(-36px)');
   });
 
   it('merges custom className', () => {

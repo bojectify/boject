@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, within } from 'storybook/test';
 import { Carousel } from './Carousel.js';
 
 const slideStyle = {
@@ -85,6 +86,38 @@ export const Default: Story = {
       <Slide index={2} aria-label="3 of 3" />
     </Carousel>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // renders children
+    await expect(canvas.getByText('Slide 1')).toBeInTheDocument();
+    await expect(canvas.getByText('Slide 2')).toBeInTheDocument();
+    await expect(canvas.getByText('Slide 3')).toBeInTheDocument();
+
+    // carousel class and accessibility attributes
+    const carousel = canvas.getByRole('region');
+    await expect(carousel.className).toContain('boject-carousel');
+    await expect(carousel).toHaveAttribute('aria-roledescription', 'carousel');
+    await expect(carousel).toHaveAttribute('aria-label', 'Carousel');
+    await expect(carousel).toHaveAttribute('tabindex', '0');
+
+    // CSS custom properties fall back to defaults when props are omitted
+    const computedStyle = getComputedStyle(carousel);
+    await expect(computedStyle.getPropertyValue('--boject-carousel-gap')).toBe(
+      '16px'
+    );
+    await expect(
+      computedStyle.getPropertyValue('--boject-carousel-slide-width')
+    ).toBe('100%');
+
+    // slide class and accessibility attributes
+    const slides = canvas.getAllByRole('group');
+    await expect(slides).toHaveLength(3);
+    for (const slide of slides) {
+      await expect(slide.className).toContain('boject-carousel__slide');
+      await expect(slide).toHaveAttribute('aria-roledescription', 'slide');
+    }
+  },
 };
 
 export const ManySlides: Story = {
@@ -106,21 +139,31 @@ export const CustomAriaLabel: Story = {
       <Slide index={2} label="Photo 3" />
     </Carousel>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const carousel = canvas.getByRole('region');
+    await expect(carousel).toHaveAttribute('aria-label', 'Image gallery');
+  },
 };
 
 export const PartialSlideWidth: Story = {
   name: 'Partial Slide Width (80%)',
   render: () => (
-    <div style={{ ['--boject-carousel-slide-width' as string]: '80%' }}>
-      <Carousel>
-        <Slide index={0} />
-        <Slide index={1} />
-        <Slide index={2} />
-        <Slide index={3} />
-        <Slide index={4} />
-      </Carousel>
-    </div>
+    <Carousel slideWidth="80%">
+      <Slide index={0} />
+      <Slide index={1} />
+      <Slide index={2} />
+      <Slide index={3} />
+      <Slide index={4} />
+    </Carousel>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const carousel = canvas.getByRole('region');
+    await expect(
+      carousel.style.getPropertyValue('--boject-carousel-slide-width')
+    ).toBe('80%');
+  },
 };
 
 export const ResponsiveSlides: Story = {
@@ -154,18 +197,21 @@ export const ResponsiveSlides: Story = {
 export const CustomGap: Story = {
   name: 'Custom Gap (32px)',
   render: () => (
-    <div
-      style={{
-        ['--boject-carousel-slide-width' as string]: '80%',
-        ['--boject-carousel-gap' as string]: '32px',
-      }}
-    >
-      <Carousel>
-        <Slide index={0} />
-        <Slide index={1} />
-        <Slide index={2} />
-        <Slide index={3} />
-      </Carousel>
-    </div>
+    <Carousel slideWidth="80%" gap="32px">
+      <Slide index={0} />
+      <Slide index={1} />
+      <Slide index={2} />
+      <Slide index={3} />
+    </Carousel>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const carousel = canvas.getByRole('region');
+    await expect(
+      carousel.style.getPropertyValue('--boject-carousel-slide-width')
+    ).toBe('80%');
+    await expect(carousel.style.getPropertyValue('--boject-carousel-gap')).toBe(
+      '32px'
+    );
+  },
 };

@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import type { RevealProps, Direction } from './Reveal.types.js';
-import './styles.css';
+import './Reveal.css';
 
 const directionMap: Record<Direction, (distance: string) => string> = {
   up: (d) => `translateY(${d})`,
@@ -13,20 +13,22 @@ export function Reveal({
   as = 'div',
   children,
   direction = 'up',
-  distance = '36px',
+  distance = null,
   duration = 800,
   delay = 0,
+  easing = 'ease-out',
   fadeIn = true,
   className,
   style,
   ...rest
 }: RevealProps) {
-  const hasSlide = distance !== '0' && distance !== '0px';
+  const hasTransform =
+    distance !== null && distance !== '0' && distance !== '0px';
 
   const classes = [
     'boject-reveal',
-    fadeIn && 'boject-reveal--fade',
-    hasSlide && 'boject-reveal--slide',
+    fadeIn && 'boject-reveal--fade-in',
+    hasTransform && 'boject-reveal--transform',
     className,
   ]
     .filter(Boolean)
@@ -36,7 +38,10 @@ export function Reveal({
     '--boject-reveal-duration': `${duration}ms`,
     '--boject-reveal-delay': `${delay}ms`,
     '--boject-reveal-distance': distance,
-    ...(hasSlide ? { transform: directionMap[direction](distance) } : {}),
+    '--boject-reveal-easing': easing,
+    '--boject-reveal-transform': hasTransform
+      ? directionMap[direction](distance)
+      : undefined,
     ...style,
   };
 
