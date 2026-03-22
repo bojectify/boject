@@ -46,6 +46,17 @@ pnpm nx storybook @boject/react-carousel
 pnpm nx storybook @boject/react-reveal
 ```
 
+### Storybook Tests
+
+Stories with `play` functions run as browser tests in headless Chromium:
+
+```bash
+pnpm nx test-storybook @boject/react-carousel
+pnpm nx run-many -t test-storybook
+```
+
+These also run automatically as part of `pnpm nx run-many -t test`.
+
 ### Working on a single package
 
 ```bash
@@ -84,9 +95,11 @@ packages/
 - **pnpm** — package manager
 - **TypeScript 5.9** — strict mode, nodenext module resolution
 - **tsup** — ESM bundler for all packages
-- **Vitest** — testing with @testing-library/react
-- **Storybook 10** — component development (react-reveal, react-carousel)
-- **Lefthook** — git hooks (lint + format on commit, test + build on push)
+- **Vitest 4.1** — unit testing with @testing-library/react
+- **Storybook 10.3** — component development (react-reveal, react-carousel)
+- **@storybook/addon-vitest** — story interaction tests in headless Chromium via Playwright
+- **Stylelint** — CSS linting (stylelint-config-standard)
+- **Lefthook** — git hooks (lint + stylelint + format on commit, test + build on push)
 - **Prettier** — code formatting
 
 ## Publishing

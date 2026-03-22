@@ -37,11 +37,28 @@ No extra markup or JavaScript needed. Browsers without support get the base scro
 
 ### Carousel
 
-| Prop         | Type        | Default      | Description                    |
-| ------------ | ----------- | ------------ | ------------------------------ |
-| `children`   | `ReactNode` | -            | `Carousel.Slide` elements      |
-| `aria-label` | `string`    | `'Carousel'` | Accessible name for the region |
-| `className`  | `string`    | -            | Additional CSS class           |
+| Prop                          | Type        | Default          | Description                        |
+| ----------------------------- | ----------- | ---------------- | ---------------------------------- |
+| `children`                    | `ReactNode` | -                | `Carousel.Slide` elements          |
+| `aria-label`                  | `string`    | `'Carousel'`     | Accessible name for the region     |
+| `className`                   | `string`    | -                | Additional CSS class               |
+| `gap`                         | `CssLength` | `'16px'`         | Space between slides               |
+| `slideWidth`                  | `CssLength` | `'100%'`         | Width of each slide                |
+| `snapAlign`                   | `SnapAlign` | `'start'`        | Scroll snap alignment              |
+| `buttonSize`                  | `CssLength` | `'2rem'`         | Scroll button size                 |
+| `buttonColor`                 | `CssColor`  | `'currentColor'` | Scroll button color                |
+| `indicatorSize`               | `CssLength` | `'8px'`          | Indicator dot diameter             |
+| `indicatorColor`              | `CssColor`  | `'#ccc'`         | Inactive indicator color           |
+| `indicatorActiveColor`        | `CssColor`  | `'#333'`         | Active indicator color             |
+| `scrollButtonOpacityEnabled`  | `string`    | `'0.7'`          | Scroll button opacity (enabled)    |
+| `scrollButtonOpacityHover`    | `string`    | `'1'`            | Scroll button opacity (hover)      |
+| `scrollButtonOpacityFocus`    | `string`    | `'1'`            | Scroll button opacity (focus)      |
+| `scrollButtonOpacityDisabled` | `string`    | `'0.4'`          | Scroll button opacity (disabled)   |
+| `scrollButtonInset`           | `CssLength` | `'16px'`         | Button distance from carousel edge |
+| `indicatorGap`                | `CssLength` | `'8px'`          | Space between indicators           |
+| `indicatorPaddingBlock`       | `CssLength` | `'16px'`         | Vertical padding around indicators |
+
+All props are type-safe — lengths accept CSS units (`px`, `rem`, `%`, etc.), colors accept CSS color values, and `snapAlign` is a union of `'start' | 'center' | 'end' | 'none'`.
 
 ### Carousel.Slide
 
@@ -52,26 +69,32 @@ No extra markup or JavaScript needed. Browsers without support get the base scro
 
 All other HTML attributes are spread onto the root element of both components.
 
-## CSS Custom Properties
-
-```css
-.boject-carousel {
-  --boject-carousel-gap: 16px;
-  --boject-carousel-slide-width: 100%;
-  --boject-carousel-snap-align: start;
-  --boject-carousel-button-size: 2rem;
-  --boject-carousel-button-color: currentColor;
-  --boject-carousel-indicator-size: 8px;
-  --boject-carousel-indicator-color: #ccc;
-  --boject-carousel-indicator-active-color: #333;
-}
-```
-
 ### Show partial next slide
 
+```tsx
+<Carousel slideWidth="85%">...</Carousel>
+```
+
+### Custom gap and slide width
+
+```tsx
+<Carousel slideWidth="80%" gap="32px">
+  ...
+</Carousel>
+```
+
+## CSS Custom Properties
+
+Props are the recommended way to customise the carousel. For advanced use cases (e.g. responsive values via media queries), you can also set CSS custom properties via a class on the carousel element:
+
 ```css
-.my-carousel {
-  --boject-carousel-slide-width: 85%;
+.responsive-carousel {
+  --boject-carousel-slide-width: 100%;
+}
+@media (min-width: 640px) {
+  .responsive-carousel {
+    --boject-carousel-slide-width: calc(50% - var(--boject-carousel-gap) / 2);
+  }
 }
 ```
 

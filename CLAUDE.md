@@ -15,7 +15,7 @@ React component library monorepo (`@boject`) managed by Nx 22.x with pnpm. Conta
 
 ## Commands
 
-Always use `pnpm nx` (never a global `nx` install).
+Always use `pnpm nx` (never a global `nx` install). Never use `npx` — use `pnpx` instead.
 
 ```bash
 # Build / Test / Lint / Typecheck a single project
@@ -23,6 +23,9 @@ pnpm nx build @boject/react-store
 pnpm nx test @boject/react-reveal
 pnpm nx lint @boject/react-carousel
 pnpm nx typecheck @boject/react-store-async
+
+# Stylelint (react-carousel and react-reveal only)
+pnpm nx stylelint @boject/react-carousel
 
 # Run across all projects
 pnpm nx run-many -t build
@@ -38,6 +41,10 @@ pnpm nx format:write
 # Storybook (react-carousel and react-reveal only)
 pnpm nx storybook @boject/react-carousel
 pnpm nx storybook @boject/react-reveal
+
+# Storybook interaction tests (runs play functions in headless Chromium)
+pnpm nx test-storybook @boject/react-carousel
+pnpm nx run-many -t test-storybook
 
 # Release (dry run)
 pnpm nx release --dry-run
@@ -76,36 +83,41 @@ Run `pnpm nx lint <project>` to verify.
 
 ### CSS Strategy
 
-- Plain CSS (not CSS Modules) with `--boject-` prefixed class names
-- Components import their own CSS (`import './styles.css'`)
+- Plain CSS (not CSS Modules) with `boject-` prefixed class names (BEM convention)
+- Components import their own CSS (e.g. `import './Carousel.css'`)
 - CSS custom properties provide theming API (e.g. `--boject-reveal-duration`, `--boject-carousel-gap`)
+- CSS custom properties are also exposed as typed React props on component packages (e.g. `<Carousel gap="32px" slideWidth="80%">`)
 - Component packages use `"sideEffects": ["*.css"]` in package.json
+- **Stylelint** enforces CSS standards via `stylelint-config-standard` with BEM class naming and allowances for cutting-edge CSS features (scroll-button, scroll-marker, anchor positioning)
 
 ### Testing
 
 - **Vitest** via `@nx/vitest` plugin. Config per-package in `vite.config.ts`.
 - **@testing-library/react** for component packages (jsdom environment)
 - **Node environment** for store-async (pure functions, no DOM)
-- Workspace-level config in `vitest.workspace.ts`
+- Workspace-level config in `vitest.workspace.ts` (scoped to `packages/*`)
 - Test files: `src/**/*.{test,spec}.{ts,tsx}`
 - Coverage: v8 provider → `./test-output/vitest/coverage`
+- **Storybook interaction tests** via `@storybook/addon-vitest` with Playwright browser mode. Stories with `play` functions run as real browser tests via the `test-storybook` Nx target. The `test` target depends on `test-storybook` so `pnpm nx run-many -t test` runs both unit and storybook tests.
 
 ### Storybook
 
-- **Storybook 10** configured on react-carousel and react-reveal via `@nx/storybook` plugin
+- **Storybook 10.3** configured on react-carousel and react-reveal via `@nx/storybook` plugin
 - Stories co-located with components: `src/*.stories.tsx`
 - Uses `@storybook/react-vite` framework with `@vitejs/plugin-react`
+- `@storybook/addon-vitest` enables running story `play` functions as Vitest browser tests (headless Chromium via Playwright)
+- Storybook test config per-package in `vitest.config.storybook.ts`
 
 ### Nx Config
 
 - All project configuration lives in each `package.json` under the `"nx"` field — there are no `project.json` files
 - Nx plugins (`@nx/js/typescript`, `@nx/vite/plugin`, `@nx/eslint/plugin`, `@nx/vitest`, `@nx/storybook/plugin`) infer targets automatically
 - Release excludes root package (configured in `nx.json` → `release.projects: ["!@boject/source"]`)
-- `test` depends on `^build` (dependencies are built first)
+- `test` depends on `^build` (dependencies are built first) and `test-storybook` (storybook interaction tests run first)
 
 ### Git Hooks (Lefthook)
 
-- **pre-commit**: lint + format check (affected, uncommitted)
+- **pre-commit**: lint + stylelint + format check (affected, uncommitted)
 - **pre-push**: test + typecheck + build (affected, vs origin/main)
 
 ## General Guidelines for working with Nx

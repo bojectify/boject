@@ -34,16 +34,19 @@ import { Reveal } from '@boject/react-reveal';
 
 ## Props
 
-| Prop        | Type                                  | Default  | Description                          |
-| ----------- | ------------------------------------- | -------- | ------------------------------------ |
-| `as`        | `ElementType`                         | `'div'`  | HTML tag to render                   |
-| `children`  | `ReactNode`                           | -        | Content to animate                   |
-| `direction` | `'up' \| 'down' \| 'left' \| 'right'` | `'up'`   | Entrance direction                   |
-| `distance`  | `string`                              | `'36px'` | Translation distance (any CSS value) |
-| `duration`  | `number`                              | `800`    | Animation duration in ms             |
-| `delay`     | `number`                              | `0`      | Animation delay in ms                |
-| `fadeIn`    | `boolean`                             | `true`   | Include opacity fade                 |
-| `className` | `string`                              | -        | Additional CSS class                 |
+| Prop        | Type                                  | Default      | Description               |
+| ----------- | ------------------------------------- | ------------ | ------------------------- |
+| `as`        | `ElementType`                         | `'div'`      | HTML tag to render        |
+| `children`  | `ReactNode`                           | -            | Content to animate        |
+| `direction` | `'up' \| 'down' \| 'left' \| 'right'` | `'up'`       | Entrance direction        |
+| `distance`  | `CssLength \| '0' \| null`            | `null`       | Translation distance      |
+| `duration`  | `number`                              | `800`        | Animation duration in ms  |
+| `delay`     | `number`                              | `0`          | Animation delay in ms     |
+| `easing`    | `Easing`                              | `'ease-out'` | Animation timing function |
+| `fadeIn`    | `boolean`                             | `true`       | Include opacity fade      |
+| `className` | `string`                              | -            | Additional CSS class      |
+
+All props are type-safe — `distance` accepts CSS length units (`px`, `rem`, `vh`, etc.), and `easing` accepts CSS timing functions (`ease`, `linear`, `cubic-bezier(...)`, `steps(...)`).
 
 All other HTML attributes are spread onto the root element.
 
