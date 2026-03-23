@@ -39,6 +39,7 @@ type CssColor =
   | `oklch(${string})`
   | `oklab(${string})`
   | `color(${string})`
+  | `light-dark(${string})`
   | 'currentColor'
   | 'transparent'
   | 'inherit';

@@ -5,8 +5,8 @@
   --boject-carousel-button-size: 2rem;
   --boject-carousel-button-color: currentColor;
   --boject-carousel-indicator-size: 8px;
-  --boject-carousel-indicator-color: #ccc;
-  --boject-carousel-indicator-active-color: #333;
+  --boject-carousel-indicator-color: light-dark(#ccc, #555);
+  --boject-carousel-indicator-active-color: light-dark(#333, #ddd);
   --boject-carousel-scroll-button-opacity-enabled: 0.7;
   --boject-carousel-scroll-button-opacity-hover: 1;
   --boject-carousel-scroll-button-opacity-focus: 1;

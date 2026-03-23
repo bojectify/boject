@@ -83,6 +83,17 @@ All other HTML attributes are spread onto the root element of both components.
 </Carousel>
 ```
 
+### Dark mode
+
+Indicator colours use `light-dark()` by default, so they adapt automatically when `color-scheme` is set on the page. To customise the light and dark values, pass `light-dark()` to the colour props:
+
+```tsx
+<Carousel
+  indicatorColor="light-dark(#bbb, #666)"
+  indicatorActiveColor="light-dark(#222, #eee)"
+/>
+```
+
 ## CSS Custom Properties
 
 Props are the recommended way to customise the carousel. For advanced use cases (e.g. responsive values via media queries), you can also set CSS custom properties via a class on the carousel element:
