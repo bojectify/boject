@@ -281,3 +281,56 @@ export const PillButtons: Story = {
     </Carousel>
   ),
 };
+
+export const ButtonsTopRight: Story = {
+  name: 'Buttons Grouped Top-Right (className)',
+  render: () => (
+    <>
+      <style>{`
+        .top-right-buttons {
+          position: relative;
+        }
+        @supports selector(::scroll-button(right)) {
+          .top-right-buttons::scroll-button(*) {
+            position: static;
+            align-self: auto;
+          }
+          .top-right-buttons::scroll-button(left) {
+            position: absolute;
+            top: 2rem;
+            left: calc(anchor(right) - 5rem);
+          }
+          .top-right-buttons::scroll-button(right) {
+            position: absolute;
+            top: 2rem;
+            left: calc(anchor(right) - 2rem);
+          }
+        }
+      `}</style>
+      <h2
+        style={{
+          fontFamily: 'sans-serif',
+          textTransform: 'uppercase',
+          fontWeight: 900,
+          color: 'light-dark(#111, #fff)',
+          marginBottom: '1rem',
+        }}
+      >
+        Latest News
+      </h2>
+      <Carousel
+        className="top-right-buttons"
+        slideWidth="80%"
+        scrollButtonBorderRadius="999px"
+        scrollButtonWidth="2.5rem"
+        scrollButtonHeight="2.5rem"
+      >
+        <Slide index={0} />
+        <Slide index={1} />
+        <Slide index={2} />
+        <Slide index={3} />
+        <Slide index={4} />
+      </Carousel>
+    </>
+  ),
+};
