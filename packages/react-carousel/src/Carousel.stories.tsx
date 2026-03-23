@@ -215,3 +215,46 @@ export const CustomGap: Story = {
     );
   },
 };
+
+export const CustomScrollButtons: Story = {
+  name: 'Custom Scroll Buttons (Catalan)',
+  render: () => (
+    <Carousel
+      slideWidth="80%"
+      scrollButtonPrevContent="'←'"
+      scrollButtonNextContent="'→'"
+      scrollButtonPrevLabel="'Anterior'"
+      scrollButtonNextLabel="'Següent'"
+    >
+      <Slide index={0} />
+      <Slide index={1} />
+      <Slide index={2} />
+      <Slide index={3} />
+      <Slide index={4} />
+    </Carousel>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const carousel = canvas.getByRole('region');
+    await expect(
+      carousel.style.getPropertyValue(
+        '--boject-carousel-scroll-button-prev-content'
+      )
+    ).toBe("'←'");
+    await expect(
+      carousel.style.getPropertyValue(
+        '--boject-carousel-scroll-button-prev-label'
+      )
+    ).toBe("'Anterior'");
+    await expect(
+      carousel.style.getPropertyValue(
+        '--boject-carousel-scroll-button-next-content'
+      )
+    ).toBe("'→'");
+    await expect(
+      carousel.style.getPropertyValue(
+        '--boject-carousel-scroll-button-next-label'
+      )
+    ).toBe("'Següent'");
+  },
+};

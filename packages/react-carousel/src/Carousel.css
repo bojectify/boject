@@ -75,7 +75,7 @@
   }
 
   .boject-carousel::scroll-button(left) {
-    content: '\25C0' / 'Previous';
+    content: var(--boject-carousel-scroll-button-prev-content, '\25C0') / var(--boject-carousel-scroll-button-prev-label, 'Previous');
     position: absolute;
     position-anchor: --boject-carousel;
     right: calc(anchor(left) - var(--boject-carousel-scroll-button-inset));
@@ -83,7 +83,7 @@
   }
 
   .boject-carousel::scroll-button(right) {
-    content: '\25B6' / 'Next';
+    content: var(--boject-carousel-scroll-button-next-content, '\25B6') / var(--boject-carousel-scroll-button-next-label, 'Next');
     position: absolute;
     position-anchor: --boject-carousel;
     left: calc(anchor(right) - var(--boject-carousel-scroll-button-inset));

@@ -65,6 +65,10 @@ export type CarouselProps = {
   scrollButtonOpacityFocus?: CssOpacity;
   scrollButtonOpacityDisabled?: CssOpacity;
   scrollButtonInset?: CssLength;
+  scrollButtonPrevContent?: string;
+  scrollButtonNextContent?: string;
+  scrollButtonPrevLabel?: string;
+  scrollButtonNextLabel?: string;
   indicatorGap?: CssLength;
   indicatorPaddingBlock?: CssLength;
 } & Omit<HTMLAttributes<HTMLDivElement>, 'className' | 'aria-label'>;

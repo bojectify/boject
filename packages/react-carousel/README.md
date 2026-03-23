@@ -55,6 +55,10 @@ No extra markup or JavaScript needed. Browsers without support get the base scro
 | `scrollButtonOpacityFocus`    | `string`    | `'1'`            | Scroll button opacity (focus)      |
 | `scrollButtonOpacityDisabled` | `string`    | `'0.4'`          | Scroll button opacity (disabled)   |
 | `scrollButtonInset`           | `CssLength` | `'16px'`         | Button distance from carousel edge |
+| `scrollButtonPrevContent`     | `string`    | `'\25C0'` (◀)   | Previous button visual content     |
+| `scrollButtonNextContent`     | `string`    | `'\25B6'` (▶)   | Next button visual content         |
+| `scrollButtonPrevLabel`       | `string`    | `'Previous'`     | Previous button accessible label   |
+| `scrollButtonNextLabel`       | `string`    | `'Next'`         | Next button accessible label       |
 | `indicatorGap`                | `CssLength` | `'8px'`          | Space between indicators           |
 | `indicatorPaddingBlock`       | `CssLength` | `'16px'`         | Vertical padding around indicators |
 
