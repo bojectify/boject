@@ -2,18 +2,18 @@
   --boject-carousel-gap: 16px;
   --boject-carousel-slide-width: 100%;
   --boject-carousel-snap-align: start;
-  --boject-carousel-button-size: 2rem;
-  --boject-carousel-button-color: currentColor;
-  --boject-carousel-indicator-size: 8px;
+  --boject-carousel-button-size: 1rem;
+  --boject-carousel-button-color: light-dark(#2563eb, #fff);
+  --boject-carousel-indicator-size: 12px;
   --boject-carousel-indicator-color: light-dark(#ccc, #555);
-  --boject-carousel-indicator-active-color: light-dark(#333, #ddd);
-  --boject-carousel-scroll-button-opacity-enabled: 0.7;
+  --boject-carousel-indicator-active-color: light-dark(#2563eb, #ddd);
+  --boject-carousel-indicator-gap: 12px;
+  --boject-carousel-indicator-padding-block: 24px;
+  --boject-carousel-scroll-button-opacity-enabled: 0.9;
   --boject-carousel-scroll-button-opacity-hover: 1;
   --boject-carousel-scroll-button-opacity-focus: 1;
-  --boject-carousel-scroll-button-opacity-disabled: 0.4;
+  --boject-carousel-scroll-button-opacity-disabled: 0.5;
   --boject-carousel-scroll-button-inset: 16px;
-  --boject-carousel-indicator-gap: 8px;
-  --boject-carousel-indicator-padding-block: 16px;
 
   display: flex;
   overflow-x: auto;
@@ -50,23 +50,39 @@
 /* Progressive enhancement — CSS scroll buttons and markers */
 @supports selector(::scroll-button(right)) {
   .boject-carousel::scroll-button(*) {
-    border: 0;
     font-size: var(--boject-carousel-button-size);
-    background: none;
     color: var(--boject-carousel-button-color);
     opacity: var(--boject-carousel-scroll-button-opacity-enabled);
+    background: var(--boject-carousel-scroll-button-background, light-dark(#fff, #2563eb));
+    border: var(--boject-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff));
+    border-radius: var(--boject-carousel-scroll-button-border-radius, 50%);
+    width: var(--boject-carousel-scroll-button-width, 2.5rem);
+    height: var(--boject-carousel-scroll-button-height, 2.5rem);
+    padding: var(--boject-carousel-scroll-button-padding, 0.5rem);
     cursor: pointer;
   }
 
   .boject-carousel::scroll-button(*):hover {
     opacity: var(--boject-carousel-scroll-button-opacity-hover);
+    background: var(--boject-carousel-scroll-button-background-hover, var(--boject-carousel-scroll-button-background, light-dark(#fff, #2563eb)));
+    border: var(--boject-carousel-scroll-button-border-hover, var(--boject-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff)));
   }
+
+  .boject-carousel::scroll-button(*):active {
+    background: var(--boject-carousel-scroll-button-background-active, var(--boject-carousel-scroll-button-background, light-dark(#fff, #2563eb)));
+    border: var(--boject-carousel-scroll-button-border-active, var(--boject-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff)));
+  }
+
   .boject-carousel::scroll-button(*):focus {
     opacity: var(--boject-carousel-scroll-button-opacity-focus);
+    background: var(--boject-carousel-scroll-button-background-focus, var(--boject-carousel-scroll-button-background, light-dark(#fff, #2563eb)));
+    border: var(--boject-carousel-scroll-button-border-focus, var(--boject-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff)));
   }
 
   .boject-carousel::scroll-button(*):disabled {
     opacity: var(--boject-carousel-scroll-button-opacity-disabled);
+    background: var(--boject-carousel-scroll-button-background-disabled, var(--boject-carousel-scroll-button-background, light-dark(#fff, #2563eb)));
+    border: var(--boject-carousel-scroll-button-border-disabled, var(--boject-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff)));
     cursor: default;
   }
 
@@ -75,7 +91,7 @@
   }
 
   .boject-carousel::scroll-button(left) {
-    content: var(--boject-carousel-scroll-button-prev-content, '\25C0') / var(--boject-carousel-scroll-button-prev-label, 'Previous');
+    content: var(--boject-carousel-scroll-button-prev-content, '\2039') / var(--boject-carousel-scroll-button-prev-label, 'Previous');
     position: absolute;
     position-anchor: --boject-carousel;
     right: calc(anchor(left) - var(--boject-carousel-scroll-button-inset));
@@ -83,7 +99,7 @@
   }
 
   .boject-carousel::scroll-button(right) {
-    content: var(--boject-carousel-scroll-button-next-content, '\25B6') / var(--boject-carousel-scroll-button-next-label, 'Next');
+    content: var(--boject-carousel-scroll-button-next-content, '\203A') / var(--boject-carousel-scroll-button-next-label, 'Next');
     position: absolute;
     position-anchor: --boject-carousel;
     left: calc(anchor(right) - var(--boject-carousel-scroll-button-inset));

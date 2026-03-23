@@ -37,30 +37,44 @@ No extra markup or JavaScript needed. Browsers without support get the base scro
 
 ### Carousel
 
-| Prop                          | Type        | Default          | Description                        |
-| ----------------------------- | ----------- | ---------------- | ---------------------------------- |
-| `children`                    | `ReactNode` | -                | `Carousel.Slide` elements          |
-| `aria-label`                  | `string`    | `'Carousel'`     | Accessible name for the region     |
-| `className`                   | `string`    | -                | Additional CSS class               |
-| `gap`                         | `CssLength` | `'16px'`         | Space between slides               |
-| `slideWidth`                  | `CssLength` | `'100%'`         | Width of each slide                |
-| `snapAlign`                   | `SnapAlign` | `'start'`        | Scroll snap alignment              |
-| `buttonSize`                  | `CssLength` | `'2rem'`         | Scroll button size                 |
-| `buttonColor`                 | `CssColor`  | `'currentColor'` | Scroll button color                |
-| `indicatorSize`               | `CssLength` | `'8px'`          | Indicator dot diameter             |
-| `indicatorColor`              | `CssColor`  | `'#ccc'`         | Inactive indicator color           |
-| `indicatorActiveColor`        | `CssColor`  | `'#333'`         | Active indicator color             |
-| `scrollButtonOpacityEnabled`  | `string`    | `'0.7'`          | Scroll button opacity (enabled)    |
-| `scrollButtonOpacityHover`    | `string`    | `'1'`            | Scroll button opacity (hover)      |
-| `scrollButtonOpacityFocus`    | `string`    | `'1'`            | Scroll button opacity (focus)      |
-| `scrollButtonOpacityDisabled` | `string`    | `'0.4'`          | Scroll button opacity (disabled)   |
-| `scrollButtonInset`           | `CssLength` | `'16px'`         | Button distance from carousel edge |
-| `scrollButtonPrevContent`     | `string`    | `'\25C0'` (◀)   | Previous button visual content     |
-| `scrollButtonNextContent`     | `string`    | `'\25B6'` (▶)   | Next button visual content         |
-| `scrollButtonPrevLabel`       | `string`    | `'Previous'`     | Previous button accessible label   |
-| `scrollButtonNextLabel`       | `string`    | `'Next'`         | Next button accessible label       |
-| `indicatorGap`                | `CssLength` | `'8px'`          | Space between indicators           |
-| `indicatorPaddingBlock`       | `CssLength` | `'16px'`         | Vertical padding around indicators |
+| Prop                             | Type        | Default       | Description                        |
+| -------------------------------- | ----------- | ------------- | ---------------------------------- |
+| `children`                       | `ReactNode` | -             | `Carousel.Slide` elements          |
+| `aria-label`                     | `string`    | `'Carousel'`  | Accessible name for the region     |
+| `className`                      | `string`    | -             | Additional CSS class               |
+| `gap`                            | `CssLength` | `'16px'`      | Space between slides               |
+| `slideWidth`                     | `CssLength` | `'100%'`      | Width of each slide                |
+| `snapAlign`                      | `SnapAlign` | `'start'`     | Scroll snap alignment              |
+| `buttonSize`                     | `CssLength` | `'1rem'`      | Scroll button font size            |
+| `buttonColor`                    | `CssColor`  | blue/white    | Scroll button color (dark aware)   |
+| `indicatorSize`                  | `CssLength` | `'8px'`       | Indicator dot diameter             |
+| `indicatorColor`                 | `CssColor`  | `'#ccc'`      | Inactive indicator color           |
+| `indicatorActiveColor`           | `CssColor`  | `'#333'`      | Active indicator color             |
+| `scrollButtonOpacityEnabled`     | `string`    | `'0.7'`       | Scroll button opacity (enabled)    |
+| `scrollButtonOpacityHover`       | `string`    | `'1'`         | Scroll button opacity (hover)      |
+| `scrollButtonOpacityFocus`       | `string`    | `'1'`         | Scroll button opacity (focus)      |
+| `scrollButtonOpacityDisabled`    | `string`    | `'0.4'`       | Scroll button opacity (disabled)   |
+| `scrollButtonInset`              | `CssLength` | `'16px'`      | Button distance from carousel edge |
+| `scrollButtonBackground`         | `CssColor`  | white/blue    | Button background (dark aware)     |
+| `scrollButtonBackgroundHover`    | `CssColor`  | -             | Button background (hover)          |
+| `scrollButtonBackgroundActive`   | `CssColor`  | -             | Button background (active)         |
+| `scrollButtonBackgroundDisabled` | `CssColor`  | -             | Button background (disabled)       |
+| `scrollButtonBackgroundFocus`    | `CssColor`  | -             | Button background (focus)          |
+| `scrollButtonBorder`             | `CssBorder` | `2px solid`   | Button border (dark aware)         |
+| `scrollButtonBorderHover`        | `CssBorder` | -             | Button border (hover)              |
+| `scrollButtonBorderActive`       | `CssBorder` | -             | Button border (active)             |
+| `scrollButtonBorderDisabled`     | `CssBorder` | -             | Button border (disabled)           |
+| `scrollButtonBorderFocus`        | `CssBorder` | -             | Button border (focus)              |
+| `scrollButtonBorderRadius`       | `CssLength` | `'50%'`       | Button border radius               |
+| `scrollButtonWidth`              | `CssLength` | `'auto'`      | Button width                       |
+| `scrollButtonHeight`             | `CssLength` | `'auto'`      | Button height                      |
+| `scrollButtonPadding`            | `CssLength` | `'0.5rem'`    | Button padding                     |
+| `scrollButtonPrevContent`        | `string`    | `'\2039'` (‹) | Previous button visual content     |
+| `scrollButtonNextContent`        | `string`    | `'\203A'` (›) | Next button visual content         |
+| `scrollButtonPrevLabel`          | `string`    | `'Previous'`  | Previous button accessible label   |
+| `scrollButtonNextLabel`          | `string`    | `'Next'`      | Next button accessible label       |
+| `indicatorGap`                   | `CssLength` | `'8px'`       | Space between indicators           |
+| `indicatorPaddingBlock`          | `CssLength` | `'16px'`      | Vertical padding around indicators |
 
 All props are type-safe — lengths accept CSS units (`px`, `rem`, `%`, etc.), colors accept CSS color values, and `snapAlign` is a union of `'start' | 'center' | 'end' | 'none'`.
 

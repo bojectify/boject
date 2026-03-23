@@ -46,6 +46,25 @@ type CssColor =
 
 type CssOpacity = `${number}`;
 
+type CssBorderStyle =
+  | 'none'
+  | 'solid'
+  | 'dashed'
+  | 'dotted'
+  | 'double'
+  | 'groove'
+  | 'ridge'
+  | 'inset'
+  | 'outset'
+  | 'hidden';
+
+type CssBorder =
+  | CssBorderStyle
+  | `${CssLength} ${CssBorderStyle}`
+  | `${CssLength} ${CssBorderStyle} ${CssColor}`
+  | `${CssBorderStyle} ${CssColor}`
+  | '0';
+
 type SnapAlign = 'start' | 'center' | 'end' | 'none';
 
 export type CarouselProps = {
@@ -65,6 +84,20 @@ export type CarouselProps = {
   scrollButtonOpacityFocus?: CssOpacity;
   scrollButtonOpacityDisabled?: CssOpacity;
   scrollButtonInset?: CssLength;
+  scrollButtonBackground?: CssColor;
+  scrollButtonBackgroundHover?: CssColor;
+  scrollButtonBackgroundActive?: CssColor;
+  scrollButtonBackgroundDisabled?: CssColor;
+  scrollButtonBackgroundFocus?: CssColor;
+  scrollButtonBorder?: CssBorder;
+  scrollButtonBorderHover?: CssBorder;
+  scrollButtonBorderActive?: CssBorder;
+  scrollButtonBorderDisabled?: CssBorder;
+  scrollButtonBorderFocus?: CssBorder;
+  scrollButtonBorderRadius?: CssLength;
+  scrollButtonWidth?: CssLength;
+  scrollButtonHeight?: CssLength;
+  scrollButtonPadding?: CssLength | `${CssLength} ${CssLength}`;
   scrollButtonPrevContent?: string;
   scrollButtonNextContent?: string;
   scrollButtonPrevLabel?: string;

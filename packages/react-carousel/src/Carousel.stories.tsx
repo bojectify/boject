@@ -258,3 +258,26 @@ export const CustomScrollButtons: Story = {
     ).toBe("'Següent'");
   },
 };
+
+export const PillButtons: Story = {
+  name: 'Pill Buttons (Black & White)',
+  render: () => (
+    <Carousel
+      slideWidth="80%"
+      buttonColor="light-dark(#333, #fff)"
+      scrollButtonBackground="light-dark(#fff, #333)"
+      scrollButtonBorder="2px solid light-dark(#999, #666)"
+      scrollButtonBorderRadius="999px"
+      scrollButtonWidth="3.5rem"
+      scrollButtonHeight="2rem"
+      scrollButtonPadding="0.25rem 0.75rem"
+      scrollButtonInset="26px"
+    >
+      <Slide index={0} />
+      <Slide index={1} />
+      <Slide index={2} />
+      <Slide index={3} />
+      <Slide index={4} />
+    </Carousel>
+  ),
+};
