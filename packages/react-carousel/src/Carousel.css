@@ -23,14 +23,6 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.boject-carousel::-webkit-scrollbar {
-  display: none;
-}
-
-.boject-carousel {
-  scrollbar-width: none;
-}
-
 .boject-carousel:focus-visible {
   outline: 2px solid;
   outline-offset: 2px;
@@ -49,6 +41,14 @@
 
 /* Progressive enhancement — CSS scroll buttons and markers */
 @supports selector(::scroll-button(right)) {
+  .boject-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .boject-carousel {
+    scrollbar-width: none;
+  }
+
   .boject-carousel::scroll-button(*) {
     font-size: var(--boject-carousel-button-size);
     color: var(--boject-carousel-button-color);
