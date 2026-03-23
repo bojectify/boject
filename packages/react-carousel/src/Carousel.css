@@ -21,6 +21,11 @@
   scroll-behavior: smooth;
   gap: var(--boject-carousel-gap);
   -webkit-overflow-scrolling: touch;
+  scrollbar-color: transparent transparent;
+}
+
+.boject-carousel:hover {
+  scrollbar-color: auto;
 }
 
 .boject-carousel:focus-visible {
