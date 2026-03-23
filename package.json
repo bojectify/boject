@@ -5,6 +5,10 @@
   "scripts": {
     "storybook:react-carousel": "nx storybook @boject/react-carousel --port=${PORT:-50262}",
     "storybook:react-reveal": "nx storybook @boject/react-reveal --port=${PORT:-55511}",
+    "lint:all": "nx run-many -t lint",
+    "typecheck:all": "nx run-many -t typecheck",
+    "test:all": "nx run-many -t test",
+    "build:all": "nx run-many -t build",
     "prepare": "lefthook install"
   },
   "private": true,
@@ -18,7 +22,6 @@
     "@nx/vitest": "22.5.2",
     "@nx/web": "22.5.4",
     "@storybook/addon-vitest": "^10.3.1",
-    "@storybook/react": "10.3.1",
     "@storybook/react-vite": "10.3.1",
     "@swc-node/register": "1.11.1",
     "@swc/core": "1.15.8",
@@ -33,6 +36,9 @@
     "@vitest/coverage-v8": "4.1.0",
     "@vitest/ui": "4.1.0",
     "eslint": "^9.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-storybook": "^10.3.3",
     "jiti": "2.4.2",
     "jsdom": "^29.0.0",
     "jsonc-eslint-parser": "^2.1.0",

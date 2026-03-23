@@ -1,6 +1,8 @@
 import nx from '@nx/eslint-plugin';
+import prettier from 'eslint-config-prettier';
 
 export default [
+  prettier,
   ...nx.configs['flat/base'],
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],

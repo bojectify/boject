@@ -56,7 +56,7 @@
         ]
       },
       "build": {
-        "command": "tsup && cp src/styles.css dist/styles.css",
+        "command": "tsup && cp src/Reveal.css dist/Reveal.css",
         "options": {
           "cwd": "{projectRoot}"
         },

@@ -56,7 +56,7 @@
         ]
       },
       "build": {
-        "command": "tsup && cp src/styles.css dist/styles.css",
+        "command": "tsup && cp src/Carousel.css dist/Carousel.css",
         "options": {
           "cwd": "{projectRoot}"
         },
