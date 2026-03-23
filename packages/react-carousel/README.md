@@ -132,8 +132,10 @@ Props are the recommended way to customise the carousel. For advanced use cases 
 - Scroll container: `role="region"`, `aria-roledescription="carousel"`, `tabindex="0"`
 - Each slide: `role="group"`, `aria-roledescription="slide"`
 - Keyboard navigable via Tab + arrow keys
+- Scroll buttons have `focus-visible` outlines and accessible labels via CSS `content` alt text (customisable via `scrollButtonPrevLabel` / `scrollButtonNextLabel`)
+- Scroll buttons remain visible on hybrid devices (tablet + keyboard) — only hidden on touch-only devices
 - Respects `prefers-reduced-motion` (disables smooth scrolling)
-- Active scroll marker has a size difference (not just color) for color-blind users
+- Indicator dots meet 3:1 non-text contrast and use size differentiation (not just colour) for the active state
 
 ### Labelling slides
 

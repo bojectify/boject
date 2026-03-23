@@ -32,7 +32,7 @@ function Slide({
   'aria-label'?: string;
 }) {
   return (
-    <Carousel.Slide aria-label={ariaLabel}>
+    <Carousel.Slide aria-label={ariaLabel ?? `Slide ${index + 1}`}>
       <div
         style={{
           ...slideStyle,

@@ -5,7 +5,7 @@
   --boject-carousel-button-size: 1rem;
   --boject-carousel-button-color: light-dark(#2563eb, #fff);
   --boject-carousel-indicator-size: 12px;
-  --boject-carousel-indicator-color: light-dark(#ccc, #555);
+  --boject-carousel-indicator-color: light-dark(#767676, #8a8a8a);
   --boject-carousel-indicator-active-color: light-dark(#2563eb, #ddd);
   --boject-carousel-indicator-gap: 12px;
   --boject-carousel-indicator-padding-block: 24px;
@@ -79,6 +79,11 @@
     border: var(--boject-carousel-scroll-button-border-focus, var(--boject-carousel-scroll-button-border, 2px solid light-dark(#2563eb, #fff)));
   }
 
+  .boject-carousel::scroll-button(*):focus-visible {
+    outline: 2px solid;
+    outline-offset: 2px;
+  }
+
   .boject-carousel::scroll-button(*):disabled {
     opacity: var(--boject-carousel-scroll-button-opacity-disabled);
     background: var(--boject-carousel-scroll-button-background-disabled, var(--boject-carousel-scroll-button-background, light-dark(#fff, #2563eb)));
@@ -132,8 +137,9 @@
     transform: scale(1.5);
   }
 
-  /* Hide scroll buttons on touch devices — swipe is the natural gesture */
-  @media (pointer: coarse) {
+  /* Hide scroll buttons on touch-only devices — swipe is the natural gesture.
+     Uses any-pointer: fine so hybrid devices (tablet + keyboard) keep buttons. */
+  @media not (any-pointer: fine) {
     .boject-carousel::scroll-button(*) {
       display: none;
     }
