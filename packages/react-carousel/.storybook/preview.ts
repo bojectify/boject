@@ -22,10 +22,14 @@ const preview: Preview = {
   decorators: [
     (Story, context) => {
       const theme = context.globals.theme;
+      const isDark =
+        theme === 'dark' ||
+        (theme === 'auto' &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches);
       document.documentElement.style.colorScheme =
-        theme === 'auto' ? '' : theme;
-      document.body.style.backgroundColor = theme === 'dark' ? '#1a1a1a' : '';
-      document.body.style.color = theme === 'dark' ? '#e0e0e0' : '';
+        theme === 'auto' ? 'light dark' : theme;
+      document.body.style.backgroundColor = isDark ? '#1a1a1a' : '';
+      document.body.style.color = isDark ? '#e0e0e0' : '';
       return Story();
     },
   ],

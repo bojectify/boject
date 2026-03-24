@@ -33,7 +33,7 @@
     ],
     "targets": {
       "test-storybook": {
-        "command": "vitest run --config vitest.config.storybook.ts",
+        "command": "vitest run --project storybook",
         "options": {
           "cwd": "{projectRoot}"
         },
@@ -41,7 +41,7 @@
         "inputs": [
           "{projectRoot}/src/**/*.stories.{ts,tsx}",
           "{projectRoot}/.storybook/**/*",
-          "{projectRoot}/vitest.config.storybook.ts"
+          "{projectRoot}/vite.config.ts"
         ]
       },
       "stylelint": {
