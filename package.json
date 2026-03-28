@@ -1,6 +1,6 @@
 {
   "name": "@boject/source",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "storybook:react-carousel": "nx storybook @boject/react-carousel --port=${PORT:-50262}",
