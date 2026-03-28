@@ -108,12 +108,38 @@ packages/
 # Dry run
 pnpm nx release --dry-run
 
-# Local testing with Verdaccio
-pnpm nx local-registry
-pnpm nx release publish --registry=http://localhost:4873
-
 # Release to NPM
 pnpm nx release
+```
+
+### Local testing with Verdaccio
+
+Use the local registry to test packages as real npm installs before publishing.
+
+**Terminal 1** — start the local registry (runs on `localhost:4873`):
+
+```bash
+pnpm nx local-registry
+```
+
+**Terminal 2** — publish all packages:
+
+```bash
+for pkg in react-carousel react-reveal react-store react-store-async; do
+  (cd packages/$pkg && pnpm publish --registry http://localhost:4873 --no-git-checks)
+done
+```
+
+**In another project** — install from the local registry:
+
+```bash
+pnpm add @boject/react-carousel --registry http://localhost:4873
+```
+
+To republish the same version, delete the package from local storage first:
+
+```bash
+rm -rf tmp/local-registry/storage/@boject/react-carousel
 ```
 
 ## License

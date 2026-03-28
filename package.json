@@ -1,6 +1,6 @@
 {
   "name": "@boject/source",
-  "version": "0.0.1",
+  "version": "0.0.1-rc.1",
   "license": "MIT",
   "scripts": {
     "storybook:react-carousel": "nx storybook @boject/react-carousel --port=${PORT:-50262}",
@@ -9,6 +9,8 @@
     "typecheck:all": "nx run-many -t typecheck",
     "test:all": "nx run-many -t test",
     "build:all": "nx run-many -t build",
+    "publish:react-reveal": "cd packages/react-reveal && pnpm publish --registry http://localhost:4873 --no-git-checks && cd ../",
+    "publish:react-carousel": "cd packages/react-carousel && pnpm publish --registry http://localhost:4873 --no-git-checks && cd ../",
     "prepare": "lefthook install"
   },
   "private": true,
