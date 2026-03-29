@@ -42,10 +42,6 @@ export function Reveal({
     '--boject-reveal-transform': hasTransform
       ? directionMap[direction](distance)
       : undefined,
-    ...(fadeIn && { opacity: 0 }),
-    ...(hasTransform && {
-      transform: directionMap[direction](distance),
-    }),
     ...style,
   };
 
