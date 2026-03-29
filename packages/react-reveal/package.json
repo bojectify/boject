@@ -12,7 +12,8 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
-    }
+    },
+    "./styles.css": "./dist/index.css"
   },
   "files": [
     "dist",
@@ -45,7 +46,7 @@
         ]
       },
       "stylelint": {
-        "command": "stylelint \"src/**/*.css\"",
+        "command": "stylelint \"src/**/*.css\" --allow-empty-input",
         "options": {
           "cwd": "{projectRoot}"
         },

@@ -14,6 +14,7 @@ npm install @boject/react-carousel react
 
 ```tsx
 import { Carousel } from '@boject/react-carousel';
+import '@boject/react-carousel/styles.css';
 
 <Carousel>
   <Carousel.Slide>First slide</Carousel.Slide>
@@ -21,6 +22,8 @@ import { Carousel } from '@boject/react-carousel';
   <Carousel.Slide>Third slide</Carousel.Slide>
 </Carousel>;
 ```
+
+The CSS import is required — it loads the carousel's scroll-snap, scroll-button, and indicator styles. Import it once in your app's root layout or entry point.
 
 Navigation is native browser scroll: touch swipe, trackpad, keyboard (Tab to focus, arrow keys to scroll).
 

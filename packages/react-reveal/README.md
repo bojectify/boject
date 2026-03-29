@@ -14,6 +14,7 @@ npm install @boject/react-reveal react
 
 ```tsx
 import { Reveal } from '@boject/react-reveal';
+import '@boject/react-reveal/styles.css';
 
 <Reveal>
   <h1>Fades and slides up</h1>

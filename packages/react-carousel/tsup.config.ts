@@ -9,7 +9,6 @@ export default defineConfig({
       composite: false,
     },
   },
-  injectStyle: true,
   clean: true,
   external: ['react', 'react-dom'],
 });

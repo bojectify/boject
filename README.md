@@ -95,12 +95,24 @@ packages/
 - **pnpm** — package manager
 - **TypeScript 5.9** — strict mode, nodenext module resolution
 - **tsup** — ESM bundler for all packages
+- **vanilla-extract** — typed CSS authoring for react-reveal (static CSS extraction)
 - **Vitest 4.1** — unit testing with @testing-library/react
 - **Storybook 10.3** — component development (react-reveal, react-carousel)
 - **@storybook/addon-vitest** — story interaction tests in headless Chromium via Playwright
 - **Stylelint** — CSS linting (stylelint-config-standard)
 - **Lefthook** — git hooks (lint + stylelint + format on commit, test + build on push)
 - **Prettier** — code formatting
+
+### SSR Usage
+
+For server-side rendered apps (Next.js, Remix, etc.), import the styles in your root layout:
+
+```tsx
+import '@boject/react-reveal/styles.css';
+import '@boject/react-carousel/styles.css';
+```
+
+This ensures CSS is available during SSR and prevents flash of unstyled content.
 
 ## Publishing
 
