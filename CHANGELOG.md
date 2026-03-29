@@ -1,3 +1,14 @@
+## 0.0.1-rc.5 (2026-03-29)
+
+### 🚀 Features
+
+- **react-reveal:** migrate to vanilla-extract, export styles.css ([5a5d1c0](https://github.com/bojectify/boject/commit/5a5d1c0))
+
+### ❤️ Thank You
+
+- Claude Opus 4.6 (1M context)
+- ness-EE
+
 ## 0.0.1-rc.4 (2026-03-29)
 
 This was a version bump only, there were no code changes.
