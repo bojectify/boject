@@ -1,6 +1,6 @@
 {
   "name": "@boject/react-store-async",
-  "version": "0.0.1-rc.2",
+  "version": "0.0.1-rc.3",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -20,7 +20,7 @@
   ],
   "peerDependencies": {
     "react": ">=18.0.0",
-    "@boject/react-store": "0.0.1-rc.2"
+    "@boject/react-store": "0.0.1-rc.3"
   },
   "devDependencies": {
     "vite": "^7.0.0",

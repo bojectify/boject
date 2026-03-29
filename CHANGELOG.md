@@ -1,3 +1,14 @@
+## 0.0.1-rc.3 (2026-03-29)
+
+### 🚀 Features
+
+- inject CSS at runtime via tsup, update docs ([a9b75eb](https://github.com/bojectify/boject/commit/a9b75eb))
+
+### ❤️ Thank You
+
+- Claude Opus 4.6 (1M context)
+- ness-EE
+
 ## 0.0.1-rc.2 (2026-03-28)
 
 This was a version bump only, there were no code changes.
