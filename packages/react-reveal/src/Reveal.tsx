@@ -1,9 +1,6 @@
 import { createElement } from 'react';
 import type { RevealProps, Direction } from './Reveal.types.js';
-import * as css from './Reveal.css.js';
-
-/** Strip `var(--x)` → `--x` so React sets it via `style.setProperty`. */
-const toProperty = (v: string) => v.slice(4, -1);
+import './Reveal.css';
 
 const directionMap: Record<Direction, (distance: string) => string> = {
   up: (d) => `translateY(${d})`,
@@ -29,9 +26,9 @@ export function Reveal({
     distance !== null && distance !== '0' && distance !== '0px';
 
   const classes = [
-    css.reveal,
-    fadeIn && css.fadeIn,
-    hasTransform && css.transform,
+    'boject-reveal',
+    fadeIn && 'boject-reveal--fade-in',
+    hasTransform && 'boject-reveal--transform',
     className,
   ]
     .filter(Boolean)
@@ -42,10 +39,11 @@ export function Reveal({
     : undefined;
 
   const combinedStyle = {
-    [toProperty(css.duration)]: `${duration}ms`,
-    [toProperty(css.delay)]: `${delay}ms`,
-    [toProperty(css.easing)]: easing,
-    [toProperty(css.initialTransform)]: transformValue,
+    '--boject-reveal-duration': `${duration}ms`,
+    '--boject-reveal-delay': `${delay}ms`,
+    '--boject-reveal-distance': distance,
+    '--boject-reveal-easing': easing,
+    '--boject-reveal-transform': transformValue,
     ...(fadeIn && { opacity: 0 }),
     ...(hasTransform && { transform: transformValue }),
     ...style,

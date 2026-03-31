@@ -1,0 +1,36 @@
+.boject-reveal {
+  animation-duration: var(--boject-reveal-duration);
+  animation-delay: var(--boject-reveal-delay);
+  animation-timing-function: var(--boject-reveal-easing);
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.boject-reveal--fade-in {
+  opacity: 0;
+  animation-name: boject-reveal-fade-in;
+}
+
+.boject-reveal--transform {
+  transform: var(--boject-reveal-transform);
+  animation-name: boject-reveal-transform;
+}
+
+.boject-reveal--fade-in.boject-reveal--transform {
+  animation-name: boject-reveal-fade-in, boject-reveal-transform;
+}
+
+@keyframes boject-reveal-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes boject-reveal-transform {
+  100% {
+    transform: translate(0);
+  }
+}

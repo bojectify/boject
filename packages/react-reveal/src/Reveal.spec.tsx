@@ -1,9 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import { Reveal } from './Reveal.js';
-import * as css from './Reveal.css.js';
-
-/** Strip `var(--x)` → `--x` to match the inline style property name. */
-const prop = (v: string) => v.slice(4, -1);
 
 describe('Reveal', () => {
   it('renders children', () => {
@@ -34,7 +30,7 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.className).toContain(css.fadeIn);
+    expect(el.className).toContain('boject-reveal--fade-in');
   });
 
   it('does not apply fade class when fadeIn is false', () => {
@@ -44,7 +40,7 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.className).not.toContain(css.fadeIn);
+    expect(el.className).not.toContain('boject-reveal--fade-in');
   });
 
   it('applies transform class when distance is non-zero', () => {
@@ -54,7 +50,7 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.className).toContain(css.transform);
+    expect(el.className).toContain('boject-reveal--transform');
   });
 
   it('does not apply transform class when distance is 0', () => {
@@ -64,7 +60,7 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.className).not.toContain(css.transform);
+    expect(el.className).not.toContain('boject-reveal--transform');
   });
 
   it('sets CSS custom properties from props', () => {
@@ -74,8 +70,9 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.style.getPropertyValue(prop(css.duration))).toBe('400ms');
-    expect(el.style.getPropertyValue(prop(css.delay))).toBe('100ms');
+    expect(el.style.getPropertyValue('--boject-reveal-duration')).toBe('400ms');
+    expect(el.style.getPropertyValue('--boject-reveal-delay')).toBe('100ms');
+    expect(el.style.getPropertyValue('--boject-reveal-distance')).toBe('50px');
   });
 
   it('sets easing CSS custom property from prop', () => {
@@ -85,7 +82,7 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.style.getPropertyValue(prop(css.easing))).toBe(
+    expect(el.style.getPropertyValue('--boject-reveal-easing')).toBe(
       'cubic-bezier(0.4, 0, 0.2, 1)'
     );
   });
@@ -93,7 +90,9 @@ describe('Reveal', () => {
   it('defaults easing to ease-out', () => {
     render(<Reveal data-testid="reveal">Hello</Reveal>);
     const el = screen.getByTestId('reveal');
-    expect(el.style.getPropertyValue(prop(css.easing))).toBe('ease-out');
+    expect(el.style.getPropertyValue('--boject-reveal-easing')).toBe(
+      'ease-out'
+    );
   });
 
   it('sets correct transform for each direction', () => {
@@ -105,7 +104,7 @@ describe('Reveal', () => {
     expect(
       screen
         .getByTestId('reveal')
-        .style.getPropertyValue(prop(css.initialTransform))
+        .style.getPropertyValue('--boject-reveal-transform')
     ).toBe('translateY(36px)');
 
     rerender(
@@ -116,7 +115,7 @@ describe('Reveal', () => {
     expect(
       screen
         .getByTestId('reveal')
-        .style.getPropertyValue(prop(css.initialTransform))
+        .style.getPropertyValue('--boject-reveal-transform')
     ).toBe('translateY(-36px)');
 
     rerender(
@@ -127,7 +126,7 @@ describe('Reveal', () => {
     expect(
       screen
         .getByTestId('reveal')
-        .style.getPropertyValue(prop(css.initialTransform))
+        .style.getPropertyValue('--boject-reveal-transform')
     ).toBe('translateX(36px)');
 
     rerender(
@@ -138,7 +137,7 @@ describe('Reveal', () => {
     expect(
       screen
         .getByTestId('reveal')
-        .style.getPropertyValue(prop(css.initialTransform))
+        .style.getPropertyValue('--boject-reveal-transform')
     ).toBe('translateX(-36px)');
   });
 
@@ -149,7 +148,7 @@ describe('Reveal', () => {
       </Reveal>
     );
     const el = screen.getByTestId('reveal');
-    expect(el.className).toContain(css.reveal);
+    expect(el.className).toContain('boject-reveal');
     expect(el.className).toContain('custom');
   });
 

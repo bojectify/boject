@@ -69,8 +69,7 @@ Run `pnpm nx lint <project>` to verify.
 ### Build Tooling
 
 - **tsup** bundles all packages (ESM-only, with TypeScript declarations)
-- **react-reveal** uses `@vanilla-extract/css` for typed CSS authoring. tsup uses `@vanilla-extract/esbuild-plugin` for static CSS extraction at build time. The Vite config includes `@vanilla-extract/vite-plugin` for Storybook and vitest.
-- **react-carousel** uses plain CSS with tsup extracting it to `dist/index.css`
+- Component packages use plain CSS — tsup extracts it to `dist/index.css`
 - Both component packages export `./styles.css` pointing to `dist/index.css` for SSR consumers
 - `@nx/js/typescript` plugin handles `typecheck` target only (not builds)
 - `@nx/vite/plugin` target names are prefixed with `vite-` to avoid conflicts with custom tsup build targets
@@ -85,11 +84,12 @@ Run `pnpm nx lint <project>` to verify.
 
 ### CSS Strategy
 
-- **react-reveal**: Uses `@vanilla-extract/css` — typed CSS vars (`createVar`), keyframes, and style classes in `Reveal.css.ts`. Static CSS extracted at build time. Inline `opacity: 0` and `transform` set on the element for SSR (CSS animations override inline styles via `animation-fill-mode: forwards`).
-- **react-carousel**: Plain CSS with `boject-` prefixed class names (BEM convention). Uses cutting-edge CSS features (`::scroll-button`, `::scroll-marker`, anchor positioning) that aren't expressible in vanilla-extract's type system.
-- CSS custom properties provide theming API (e.g. `--boject-carousel-gap`). Carousel exposes these as typed React props (`<Carousel gap="32px" slideWidth="80%">`).
+- Plain CSS (not CSS Modules) with `boject-` prefixed class names (BEM convention)
+- **react-reveal**: Inline `opacity: 0` and `transform` set on the element for SSR (CSS animations override inline styles via `animation-fill-mode: forwards`)
+- **react-carousel**: Uses cutting-edge CSS features (`::scroll-button`, `::scroll-marker`, anchor positioning)
+- CSS custom properties provide theming API (e.g. `--boject-carousel-gap`). Carousel exposes these as typed React props (`<Carousel gap="32px" slideWidth="80%">`)
 - Both packages export `./styles.css` for SSR consumers: `import '@boject/react-reveal/styles.css'`
-- **Stylelint** enforces CSS standards on plain CSS files (react-carousel). react-reveal uses `--allow-empty-input` since it has no plain CSS.
+- **Stylelint** enforces CSS standards via `stylelint-config-standard`
 
 ### Testing
 

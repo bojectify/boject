@@ -46,7 +46,7 @@
         ]
       },
       "stylelint": {
-        "command": "stylelint \"src/**/*.css\" --allow-empty-input",
+        "command": "stylelint \"src/**/*.css\"",
         "options": {
           "cwd": "{projectRoot}"
         },
