@@ -1,3 +1,7 @@
+## 0.0.1-rc.6 (2026-03-31)
+
+This was a version bump only, there were no code changes.
+
 ## 0.0.1-rc.5 (2026-03-29)
 
 ### 🚀 Features
