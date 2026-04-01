@@ -1,0 +1,35 @@
+name: Publish @boject/react-carousel
+
+on:
+  push:
+    tags:
+      - '@boject/react-carousel@*'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [24]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org
+
+      - run: npm install -g npm@latest
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm nx build @boject/react-carousel
+
+      - run: npm publish --provenance --access public
+        working-directory: packages/react-carousel

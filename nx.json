@@ -60,7 +60,7 @@
     }
   ],
   "release": {
-    "projects": ["!@boject/source"],
+    "projects": ["@boject/react-reveal", "@boject/react-carousel"],
     "version": {
       "preVersionCommand": "npx nx run-many -t build",
       "preserveMatchingDependencyRanges": false
