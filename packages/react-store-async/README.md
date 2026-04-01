@@ -1,5 +1,10 @@
 # @boject/react-store-async
 
+[![CI](https://github.com/bojectify/boject/actions/workflows/ci.yml/badge.svg)](https://github.com/bojectify/boject/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/@boject/react-store-async)](https://www.npmjs.com/package/@boject/react-store-async)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@boject/react-store-async)](https://bundlephobia.com/package/@boject/react-store-async)
+[![License](https://img.shields.io/npm/l/@boject/react-store-async)](https://github.com/bojectify/boject/blob/main/LICENSE)
+
 Async fetch helpers for [@boject/react-store](https://www.npmjs.com/package/@boject/react-store). Provides the REQUEST / SUCCESS / ERROR pattern for data fetching with minimal boilerplate.
 
 ## Install

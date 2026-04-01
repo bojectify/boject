@@ -1,5 +1,10 @@
 # @boject/react-reveal
 
+[![CI](https://github.com/bojectify/boject/actions/workflows/ci.yml/badge.svg)](https://github.com/bojectify/boject/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/@boject/react-reveal)](https://www.npmjs.com/package/@boject/react-reveal)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@boject/react-reveal)](https://bundlephobia.com/package/@boject/react-reveal)
+[![License](https://img.shields.io/npm/l/@boject/react-reveal)](https://github.com/bojectify/boject/blob/main/LICENSE)
+
 CSS animation wrapper for React. Fade and slide elements into view with zero JavaScript animation — pure CSS transitions driven by props.
 
 RSC-compatible. No `"use client"` directive required.

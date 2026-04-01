@@ -1,5 +1,10 @@
 # @boject/react-store
 
+[![CI](https://github.com/bojectify/boject/actions/workflows/ci.yml/badge.svg)](https://github.com/bojectify/boject/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/@boject/react-store)](https://www.npmjs.com/package/@boject/react-store)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@boject/react-store)](https://bundlephobia.com/package/@boject/react-store)
+[![License](https://img.shields.io/npm/l/@boject/react-store)](https://github.com/bojectify/boject/blob/main/LICENSE)
+
 A `createStore` factory that replaces manual `useReducer` + `createContext` + Provider boilerplate. Inspired by Vuex's getter pattern.
 
 ## Install

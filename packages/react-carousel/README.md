@@ -1,5 +1,10 @@
 # @boject/react-carousel
 
+[![CI](https://github.com/bojectify/boject/actions/workflows/ci.yml/badge.svg)](https://github.com/bojectify/boject/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/@boject/react-carousel)](https://www.npmjs.com/package/@boject/react-carousel)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@boject/react-carousel)](https://bundlephobia.com/package/@boject/react-carousel)
+[![License](https://img.shields.io/npm/l/@boject/react-carousel)](https://github.com/bojectify/boject/blob/main/LICENSE)
+
 CSS-only scroll-snap carousel for React. No JavaScript scroll handlers — just native browser scrolling with CSS scroll-snap. All slides are in the DOM and fully indexable by search engines.
 
 RSC-compatible. No `"use client"` directive required.
